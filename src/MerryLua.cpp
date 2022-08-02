@@ -95,11 +95,11 @@ MerryLua::MerryLua()
 	lua_pushinteger(L,(int)HWND_TEXTCTRL);
 	lua_setglobal(L, "HWND_TEXTCTRL");
 
-	//Ê×ÏÈ³õÊ¼»¯
+	//é¦–å…ˆåˆå§‹åŒ–
 	for(int i=0 ; i < LUA_FUNC_MAX ; ++i )
 		lua_func[i] = LUA_NOREF;
 
-	//»ñÈ¡ÄÚÖÃº¯Êı
+	//è·å–å†…ç½®å‡½æ•°
 	int it = lua_gettop(L);
 	for(int i=0; i < LUA_EXTERNAL_FUNC;++i)
 	{

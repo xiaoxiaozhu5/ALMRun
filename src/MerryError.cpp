@@ -21,12 +21,12 @@ void ShowErrinfo(const int error_type)
 
 	if (error_type< CONFIG_ERROR_TYPE)
 	{
-		wxMessageBox("提示",s_lastError,wxICON_INFORMATION);
+		wxMessageBox("餅戯灗戮",s_lastError,wxICON_INFORMATION);
 		return;
 	}
 	if (!g_config->get((CONFIG_ITEM_T)error_type))
 		return;
-	MerryInformationDialog *dlg = new MerryInformationDialog("提示",s_lastError,wxEmptyString);
+	MerryInformationDialog *dlg = new MerryInformationDialog("餅戯灗戮",s_lastError,wxEmptyString);
 	dlg->ShowModal();
 	if (dlg->isChecked())
 		g_config->set(error_type,false);

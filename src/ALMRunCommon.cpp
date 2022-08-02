@@ -10,13 +10,13 @@
 	#include "TlHelp32.h"
 #endif
 /* 
-º¯Êı¹¦ÄÜ£º¶ÔÖ¸¶¨ÎÄ¼şÔÚÖ¸¶¨µÄÄ¿Â¼ÏÂ´´½¨Æä¿ì½İ·½Ê½ 
-º¯Êı²ÎÊı£º 
-lpszFileName    Ö¸¶¨ÎÄ¼ş£¬ÎªNULL±íÊ¾µ±Ç°½ø³ÌµÄEXEÎÄ¼ş¡£ 
-lpszLnkFilePath Òª´´½¨µÄ¿ì½İ·½Ê½È«Â·¾¶.
-wHotkey         Îª0±íÊ¾²»ÉèÖÃ¿ì½İ¼ü 
-pszDescription  ±¸×¢ 
-iShowCmd        ÔËĞĞ·½Ê½£¬Ä¬ÈÏÎª³£¹æ´°¿Ú 
+å‡½æ•°åŠŸèƒ½ï¼šå¯¹æŒ‡å®šæ–‡ä»¶åœ¨æŒ‡å®šçš„ç›®å½•ä¸‹åˆ›å»ºå…¶å¿«æ·æ–¹å¼ 
+å‡½æ•°å‚æ•°ï¼š 
+lpszFileName    æŒ‡å®šæ–‡ä»¶ï¼Œä¸ºNULLè¡¨ç¤ºå½“å‰è¿›ç¨‹çš„EXEæ–‡ä»¶ã€‚ 
+lpszLnkFilePath è¦åˆ›å»ºçš„å¿«æ·æ–¹å¼å…¨è·¯å¾„.
+wHotkey         ä¸º0è¡¨ç¤ºä¸è®¾ç½®å¿«æ·é”® 
+pszDescription  å¤‡æ³¨ 
+iShowCmd        è¿è¡Œæ–¹å¼ï¼Œé»˜è®¤ä¸ºå¸¸è§„çª—å£ 
 */  
 BOOL CreateFileShortcut(LPCWSTR lpszFileName, LPCWSTR lpszLnkFilePath, LPCWSTR lpszWorkDir, WORD wHotkey, LPCTSTR lpszDescription, int iShowCmd)  
 {  
@@ -24,15 +24,15 @@ BOOL CreateFileShortcut(LPCWSTR lpszFileName, LPCWSTR lpszLnkFilePath, LPCWSTR l
         return FALSE;  
   
     HRESULT hr;  
-    IShellLink     *pLink;  //IShellLink¶ÔÏóÖ¸Õë  
-    IPersistFile   *ppf; //IPersisFil¶ÔÏóÖ¸Õë  
+    IShellLink     *pLink;  //IShellLinkå¯¹è±¡æŒ‡é’ˆ  
+    IPersistFile   *ppf; //IPersisFilå¯¹è±¡æŒ‡é’ˆ  
       
-    //´´½¨IShellLink¶ÔÏó  
+    //åˆ›å»ºIShellLinkå¯¹è±¡  
     hr = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink, (void**)&pLink);  
     if (FAILED(hr))  
         return FALSE;  
       
-    //´ÓIShellLink¶ÔÏóÖĞ»ñÈ¡IPersistFile½Ó¿Ú  
+    //ä»IShellLinkå¯¹è±¡ä¸­è·å–IPersistFileæ¥å£  
     hr = pLink->QueryInterface(IID_IPersistFile, (void**)&ppf);  
     if (FAILED(hr))  
     {  
@@ -40,30 +40,30 @@ BOOL CreateFileShortcut(LPCWSTR lpszFileName, LPCWSTR lpszLnkFilePath, LPCWSTR l
         return FALSE;  
     }  
       
-    //Ä¿±ê  
+    //ç›®æ ‡  
     if (lpszFileName == NULL)  
         pLink->SetPath(_wpgmptr);  
     else  
         pLink->SetPath(lpszFileName);  
-    //¹¤×÷Ä¿Â¼  
+    //å·¥ä½œç›®å½•  
     if (lpszWorkDir != NULL)  
 		pLink->SetWorkingDirectory(lpszWorkDir);  
       
-    //¿ì½İ¼ü  
+    //å¿«æ·é”®  
     if (wHotkey != 0)  
         pLink->SetHotkey(wHotkey);  
       
-    //±¸×¢  
+    //å¤‡æ³¨  
     if (lpszDescription != NULL)  
         pLink->SetDescription(lpszDescription);  
       
-    //ÏÔÊ¾·½Ê½  
+    //æ˜¾ç¤ºæ–¹å¼  
     pLink->SetShowCmd(iShowCmd);  
   
   
-    //¿ì½İ·½Ê½µÄÂ·¾¶ + Ãû³Æ  
+    //å¿«æ·æ–¹å¼çš„è·¯å¾„ + åç§°  
 
-    //±£´æ¿ì½İ·½Ê½µ½Ö¸¶¨Ä¿Â¼ÏÂ  
+    //ä¿å­˜å¿«æ·æ–¹å¼åˆ°æŒ‡å®šç›®å½•ä¸‹  
     hr = ppf->Save(lpszLnkFilePath,TRUE);  
       
     ppf->Release();  
@@ -121,7 +121,7 @@ void ListFiles(const wxString& dirname,wxArrayString *files,const wxString& file
 	{
 		int j = -1;
 		for(j = exc.size()-1;j >= 0;--j)
-		{//¹ıÂË·ûºÏÌõ¼şµÄÄÚÈİ
+		{//è¿‡æ»¤ç¬¦åˆæ¡ä»¶çš„å†…å®¹
 			if (files->Item(i).Matches(exc[j]))
 				break;
 		}
@@ -186,7 +186,7 @@ BOOL CheckActiveProg(DWORD PID)
 		{
 			if (ProInfo.th32ProcessID == PID)
 			{
-				wxMessageBox("³ÌĞòÒÑ¾­ÔÚÔËĞĞ!","¼¤»îÊ§°Ü!");
+				wxMessageBox("ç¨‹åºå·²ç»åœ¨è¿è¡Œ!","æ¿€æ´»å¤±è´¥!");
 				return TRUE;
 			}
 		}
@@ -217,7 +217,7 @@ void ListFiles(const wxString& dirname,wxArrayString *files,const wxArrayString&
 
 	if (sub == -1 || cur_sub_dir == sub)
 		return;
-	++cur_sub_dir;//×ÓÄ¿Â¼¼¶±ğ+1
+	++cur_sub_dir;//å­ç›®å½•çº§åˆ«+1
 	wxString file;
 	bool test = dir.GetFirst(&file,wxEmptyString,wxDIR_DIRS|wxDIR_HIDDEN);
 	wxString path = dir.GetNameWithSep();
@@ -226,7 +226,7 @@ void ListFiles(const wxString& dirname,wxArrayString *files,const wxArrayString&
 		ListFiles(path+file,files,filespec,sub);
 		test = dir.GetNext(&file);
 	}
-	--cur_sub_dir;//×ÓÄ¿Â¼¼¶±ğ-1
+	--cur_sub_dir;//å­ç›®å½•çº§åˆ«-1
 	return;
 }
 
@@ -290,7 +290,7 @@ ALMRunCMDBase* lua_GetCommand(lua_State* L,int flags)
 	lua_rawget(L,it);
 	cmd->Flags = lua_tointeger(L,-1) | CMDS_FLAG_LUA | flags;
 
-	//func²ÎÊıÊÇÎªÁË¼æÈİ¾É°æÅäÖÃÎÄ¼ş£¬ĞÂµÄ°æ±¾¼ò»¯ÅäÖÃ£¬²»ÔÙÊ¹ÓÃfunc²ÎÊı
+	//funcå‚æ•°æ˜¯ä¸ºäº†å…¼å®¹æ—§ç‰ˆé…ç½®æ–‡ä»¶ï¼Œæ–°çš„ç‰ˆæœ¬ç®€åŒ–é…ç½®ï¼Œä¸å†ä½¿ç”¨funcå‚æ•°
 	if (cmd->FuncRef == 0)
 	{
 		lua_pushstring(L, "func");
@@ -303,15 +303,15 @@ ALMRunCMDBase* lua_GetCommand(lua_State* L,int flags)
 	return cmd;
 }
 
-//¸ù¾İºº×ÖÇøÎ»±í»ñÈ¡ÖĞÎÄÆ´ÒôÊ××ÖÄ¸
+//æ ¹æ®æ±‰å­—åŒºä½è¡¨è·å–ä¸­æ–‡æ‹¼éŸ³é¦–å­—æ¯
 
-//ÇøÎ»±íºº×ÖÒ»Çø£¬°´Æ´ÒôÊ××ÖÄ¸¹éÀàÇø
+//åŒºä½è¡¨æ±‰å­—ä¸€åŒºï¼ŒæŒ‰æ‹¼éŸ³é¦–å­—æ¯å½’ç±»åŒº
 static int li_SecPosValue[] = {
 		0xB0A1, 0xB0C5, 0xB2C1, 0xB4EE, 0xB6EA, 0xB7A2, 0xB8C1, 0xB9FE, 0xBBF7, 0xBFA6, 0xC0AC,
 		0xC2E8, 0xC4C3, 0xC5B6, 0xC5BE, 0xC6DA, 0xC8BB, 0xC8F6, 0xCBFA, 0xCDDA, 0xCEF4, 0xD1B9, 0xD4D1
 	};
 static char* lc_FirstLetter = "ABCDEFGHJKLMNOPQRSTWXYZ";
-//µÚ¶şÇø£¬ÎŞ¹æÔòÇø£¬Ö»ÄÜÍ¨¹ı²é±íµÄ·½Ê½»ñÈ¡
+//ç¬¬äºŒåŒºï¼Œæ— è§„åˆ™åŒºï¼Œåªèƒ½é€šè¿‡æŸ¥è¡¨çš„æ–¹å¼è·å–
 static char* ls_SecondSecTable[] ={
 	"CJWGNSPGCGNEGYPBTYYZDXYKYGTZJNMJQMBSGZSCYJSYYFPGKBZGYDYWJKGKLJSWKPJQHYJWRDZLSYMRYPYWWCCKZNKYYG",
 	"TTNGJEYKKZYTCJNMCYLQLYPYSFQRPZSLWBTGKJFYXJWZLTBNCXJJJJTXDTTSQZYCDXXHGCKBPHFFSSTYBGMXLPBYLLBHLX",
@@ -358,9 +358,9 @@ wxString GetPinYin(const wxString& source)
 	for (i = 0; i < len; ++i)
 	{
 		H = name[i];
-		L = ((i+1)< len)?name[i+1]:0;//·ÀÖ¹·ÃÎÊÔ½½ç.
-		//ºº×Ö´Ó16Çø(A1)¿ªÊ¼µ½87Çø(F7)
-		//Ò»¸öÇø94¸ö,Î»Âë A1 - FE
+		L = ((i+1)< len)?name[i+1]:0;//é˜²æ­¢è®¿é—®è¶Šç•Œ.
+		//æ±‰å­—ä»16åŒº(A1)å¼€å§‹åˆ°87åŒº(F7)
+		//ä¸€ä¸ªåŒº94ä¸ª,ä½ç  A1 - FE
 		if (H < 0xB0 ||  L < 0xA1 || H > 0xF7 || L == 0xFF)
 		{
 			if (H < 0x80)
@@ -368,7 +368,7 @@ wxString GetPinYin(const wxString& source)
 			continue;
 		}
 
-		if (H < 0xD8)//(H >= 0xB0 && H <=0xD7)//²éÑ¯ÎÄ×ÖÔÚÒ»¼¶ºº×ÖÇø(16-55)
+		if (H < 0xD8)//(H >= 0xB0 && H <=0xD7)//æŸ¥è¯¢æ–‡å­—åœ¨ä¸€çº§æ±‰å­—åŒº(16-55)
 		{
 			W = (H << 8) | L;
 			for (int j = 22; j >= 0; --j)
@@ -380,7 +380,7 @@ wxString GetPinYin(const wxString& source)
 				}
 			}
 		}
-		else// if (H >= 0xD8 && H <= 0xF7)//²éÑ¯ÖĞÎÄÔÚ¶ş¼¶ºº×ÖÇø(56-87)
+		else// if (H >= 0xD8 && H <= 0xF7)//æŸ¥è¯¢ä¸­æ–‡åœ¨äºŒçº§æ±‰å­—åŒº(56-87)
 			pinyin.Append(ls_SecondSecTable[H-0xD8][L-0xA1]);
 		++i;
 	}
@@ -564,9 +564,9 @@ BOOL chkSysCmd(const wxString& cmdLine,size_t * const cmdStart = NULL)
 	
 	wxString cmdName = cmdLine.substr(n);
 
-	if (cmdName.substr(0,8).find("://") != wxNOT_FOUND //ÍøÖ·ÀàĞÍ
-		 || cmdName.StartsWith("::") //:: ÀàĞÍÏµÍ³¹¦ÄÜµ÷ÓÃ
-		 || cmdName.StartsWith("\\\\")//ÍøÂçµØÖ·»òÏµÍ³¹¦ÄÜµ÷ÓÃ
+	if (cmdName.substr(0,8).find("://") != wxNOT_FOUND //ç½‘å€ç±»å‹
+		 || cmdName.StartsWith("::") //:: ç±»å‹ç³»ç»ŸåŠŸèƒ½è°ƒç”¨
+		 || cmdName.StartsWith("\\\\")//ç½‘ç»œåœ°å€æˆ–ç³»ç»ŸåŠŸèƒ½è°ƒç”¨
 		)
 	{
 		return true;
@@ -574,7 +574,7 @@ BOOL chkSysCmd(const wxString& cmdLine,size_t * const cmdStart = NULL)
 
 	return false;
 }
-//¼òµ¥µÄ·ÖÀëÃüÁîºÍ²ÎÊıº¯Êı
+//ç®€å•çš„åˆ†ç¦»å‘½ä»¤å’Œå‚æ•°å‡½æ•°
 wxString ParseCmd(const wxString& cmdLine,wxString* const cmdArg,const wxString& workDir)
 {
 	size_t cmd_len = cmdLine.Len();
@@ -586,12 +586,12 @@ wxString ParseCmd(const wxString& cmdLine,wxString* const cmdArg,const wxString&
 		if (cmdFlags.Index(cmdLine[n]) == wxNOT_FOUND)
 			break;
 	}
-	if (n >= cmd_len)//ÃüÁîĞĞ¿ÉÄÜÎª¿Õ
+	if (n >= cmd_len)//å‘½ä»¤è¡Œå¯èƒ½ä¸ºç©º
 		return cmdLine;
 
 	wxString cmd_flag = cmdLine.Left(n);
 	size_t cmd_pos = n;
-	if (cmdLine[n] == '\"')//´øÒıºÅ
+	if (cmdLine[n] == '\"')//å¸¦å¼•å·
 	{
 		cmd_pos += 1;
 		for(++n;n<cmd_len;)
@@ -607,12 +607,12 @@ wxString ParseCmd(const wxString& cmdLine,wxString* const cmdArg,const wxString&
 	{
 		wxString tmp = cmdLine.substr(n);
 		size_t k = -1;
-		if (tmp.StartsWith("::"))//ÒÔ"::"¿ªÍ·µÄÏµÍ³¹¦ÄÜµ÷ÓÃ
+		if (tmp.StartsWith("::"))//ä»¥"::"å¼€å¤´çš„ç³»ç»ŸåŠŸèƒ½è°ƒç”¨
 		{
 			k = tmp.find(" ");
 			cmd = tmp.substr(0,k);
 		}
-		else if (tmp.substr(0,8).find("://") !=  wxNOT_FOUND)//ÍøÖ·ÀàĞÍ
+		else if (tmp.substr(0,8).find("://") !=  wxNOT_FOUND)//ç½‘å€ç±»å‹
 			cmd = tmp;
 		else
 			cmd = GetCMDPath(tmp,workDir);
@@ -640,12 +640,12 @@ wxString ParseCmd(const wxString& cmdLine,wxString* const cmdArg,const wxString&
 				break;
 			}
 		}
-		else if (c == '/' && InSpace)//¿Õ¸ñÖ®ºó½Ó '/'ÈÏÎªÊÇ²ÎÊı
+		else if (c == '/' && InSpace)//ç©ºæ ¼ä¹‹åæ¥ '/'è®¤ä¸ºæ˜¯å‚æ•°
 		{
 			cmd = cmdLine.substr(cmd_pos,lastSpace-cmd_pos);
 			break;
 		}
-		else if (c == ':' && lastSpace)//¿Õ¸ñÖ®ºóÔÙ³öÏÖÅÌ·û,Ò»°ãÈÏÎª¿Õ¸ñºóÃæµÄÄÚÈİÊÇ²ÎÊı
+		else if (c == ':' && lastSpace)//ç©ºæ ¼ä¹‹åå†å‡ºç°ç›˜ç¬¦,ä¸€èˆ¬è®¤ä¸ºç©ºæ ¼åé¢çš„å†…å®¹æ˜¯å‚æ•°
 		{
 			n = lastSpace;
 			cmd = cmdLine.substr(cmd_pos,n-cmd_pos);
@@ -694,7 +694,7 @@ static wxString _GetCMDPath(const wxString& commandLine)
 		return wxEmptyString;
 	if (fn.IsDir() && !::wxDirExists(cmdName))
 		return wxEmptyString;
-	//Èç¹ûÎÄ¼ş´æÔÚ·µ»ØÎÄ¼şÂ·¾¶
+	//å¦‚æœæ–‡ä»¶å­˜åœ¨è¿”å›æ–‡ä»¶è·¯å¾„
 	if (fn.Exists())
 	{
 		fn.MakeAbsolute();
@@ -704,13 +704,13 @@ static wxString _GetCMDPath(const wxString& commandLine)
 	bool hasvol = fn.HasVolume();
 	bool hasext = fn.HasExt();
 
-	if (fn.GetPath().empty())//ÎŞÂ·¾¶ĞÅÏ¢£¬Ê×ÏÈ³¢ÊÔ¶ÁÈ¡×¢²á±íApp PathsÎ»ÖÃ
+	if (fn.GetPath().empty())//æ— è·¯å¾„ä¿¡æ¯ï¼Œé¦–å…ˆå°è¯•è¯»å–æ³¨å†Œè¡¨App Pathsä½ç½®
 	{
 		wxString regPath = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\" + cmdName;
-		if (!hasext)//ÎŞÀ©Õ¹Ãû£¬Ìí¼Ó.exe
+		if (!hasext)//æ— æ‰©å±•åï¼Œæ·»åŠ .exe
 			regPath.Append(".exe");
 		wxRegKey reg;
-		wxRegKey::StdKey hk[2] = {wxRegKey::HKCU,wxRegKey::HKLM};//ÔÚHKCUºÍHKLMÖĞ²éÕÒ
+		wxRegKey::StdKey hk[2] = {wxRegKey::HKCU,wxRegKey::HKLM};//åœ¨HKCUå’ŒHKLMä¸­æŸ¥æ‰¾
 		for(int i=0;i<2;++i)
 		{
 			reg.SetName(hk[i],regPath);
@@ -719,35 +719,35 @@ static wxString _GetCMDPath(const wxString& commandLine)
 			regPath = reg.QueryDefaultValue();
 			if (regPath.empty())
 				continue;
-			if (wxFileExists(regPath))//ÓĞÕÒµ½£¬Ö±½Ó·µ»Ø
+			if (wxFileExists(regPath))//æœ‰æ‰¾åˆ°ï¼Œç›´æ¥è¿”å›
 				return regPath;
 		}
 	}
 
-	wxArrayString mcwd;//¸ù¾İPATHÂ·¾¶²éÑ¯ÎÄ¼ş
-	wxArrayString wExt;//ÎÄ¼şÀ©Õ¹Ãû
+	wxArrayString mcwd;//æ ¹æ®PATHè·¯å¾„æŸ¥è¯¢æ–‡ä»¶
+	wxArrayString wExt;//æ–‡ä»¶æ‰©å±•å
 
-	if (fn.IsRelative() && !fn.IsPathSeparator(cmdName[0]))//Ïà¶ÔÂ·¾¶ÔÚPATHºÍµ±Ç°Ä¿Â¼ÖĞ²éÑ¯
+	if (fn.IsRelative() && !fn.IsPathSeparator(cmdName[0]))//ç›¸å¯¹è·¯å¾„åœ¨PATHå’Œå½“å‰ç›®å½•ä¸­æŸ¥è¯¢
 		mcwd = ::wxSplit(wxString::Format("%s;%s",wxGetCwd(),wxGetenv("PATH")),';','\0');
-	else//ÊÇ¸ö¾ø¶ÔÂ·¾¶»ò¸ùÂ·¾¶
+	else//æ˜¯ä¸ªç»å¯¹è·¯å¾„æˆ–æ ¹è·¯å¾„
 		mcwd.Add("");
 
-	if (!hasext)//ÎŞÀ©Õ¹£¬²éÕÒ·ûºÏPATHEXT±äÁ¿Éè¶¨À©Õ¹µÄÎÄ¼ş
+	if (!hasext)//æ— æ‰©å±•ï¼ŒæŸ¥æ‰¾ç¬¦åˆPATHEXTå˜é‡è®¾å®šæ‰©å±•çš„æ–‡ä»¶
 	{
-		cmdName.Append(".*");//Ê¹ÓÃ.*²éÕÒËùÓĞ£¬ÔÙ¸ù¾İPATHEXTµÄÀ©Õ¹ÃûÅĞ¶Ï
+		cmdName.Append(".*");//ä½¿ç”¨.*æŸ¥æ‰¾æ‰€æœ‰ï¼Œå†æ ¹æ®PATHEXTçš„æ‰©å±•ååˆ¤æ–­
 		wExt = ::wxSplit(wxGetenv("PATHEXT"),';','\0');
 	}
 
 	size_t mc_size = mcwd.size();
 
-	for(size_t i = 0;i< mc_size;++i)//Ñ­»·²éÕÒËùÓĞÂ·¾¶ÏÂµÄÎÄ¼ş
+	for(size_t i = 0;i< mc_size;++i)//å¾ªç¯æŸ¥æ‰¾æ‰€æœ‰è·¯å¾„ä¸‹çš„æ–‡ä»¶
 	{
 		wxString strPath = mcwd[i];
 		if (!strPath.empty())
 		{
-			if (!::wxDirExists(mcwd[i]))//Â·¾¶´íÎó»ò²»´æÔÚ²»²éÕÒ
+			if (!::wxDirExists(mcwd[i]))//è·¯å¾„é”™è¯¯æˆ–ä¸å­˜åœ¨ä¸æŸ¥æ‰¾
 				continue;
-			if(!::wxEndsWithPathSeparator(strPath))//Â·¾¶²»ÊÇÒÔ"\\"½áÎ²×Ô¶¯Ìí¼Ó
+			if(!::wxEndsWithPathSeparator(strPath))//è·¯å¾„ä¸æ˜¯ä»¥"\\"ç»“å°¾è‡ªåŠ¨æ·»åŠ 
 				strPath += '\\';
 		}
 		TCHAR szFind[MAX_PATH] = {_T("\0")};
@@ -765,12 +765,12 @@ static wxString _GetCMDPath(const wxString& commandLine)
 			while (bRet)
 		{
 			if (!(findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
-			{//·ÇÄ¿Â¼
+			{//éç›®å½•
 				wxString file(findFileData.cFileName);
 				size_t pos = file.find_last_of('.');
-				//²éÕÒµÄÎÄ¼şÓĞÀ©Õ¹ÃûËµÃ÷ÒÑ¾­ÕÒµ½ÁË
-				//ÈôÃ»ÓĞÀ©Õ¹Ãû£¬²¢ÇÒÕÒµ½µÄÎÄ¼şÒ²Ã»ÓĞÀ©Õ¹Ãû£¬Ò²ÊÇ·ûºÏ
-				//·ñÔò²éÕÒ·ûºÏPATHEXTµÄÀ©Õ¹Ãû
+				//æŸ¥æ‰¾çš„æ–‡ä»¶æœ‰æ‰©å±•åè¯´æ˜å·²ç»æ‰¾åˆ°äº†
+				//è‹¥æ²¡æœ‰æ‰©å±•åï¼Œå¹¶ä¸”æ‰¾åˆ°çš„æ–‡ä»¶ä¹Ÿæ²¡æœ‰æ‰©å±•åï¼Œä¹Ÿæ˜¯ç¬¦åˆ
+				//å¦åˆ™æŸ¥æ‰¾ç¬¦åˆPATHEXTçš„æ‰©å±•å
 				if (hasext || pos == wxNOT_FOUND||wExt.Index(file.substr(pos),false,true) != wxNOT_FOUND)
 				{
 					bFind = true;
@@ -797,11 +797,11 @@ DWORD RunCMD(const wxString& cmdLine,const wxString& cmdArg,const wxString& work
 	wxString workdir = workDir;
 	bool winexec = false;
 
-	//Ìæ»»{%c}Îª¼ôÌù°åÄÚÈİ
+	//æ›¿æ¢{%c}ä¸ºå‰ªè´´æ¿å†…å®¹
 	if (cmd.find("{%c}") != wxNOT_FOUND)
 		cmd.Replace("{%c}",GetClipboardText());
 
-	//Ìæ»»{%wt}Îª´°Ìå±êÌâ
+	//æ›¿æ¢{%wt}ä¸ºçª—ä½“æ ‡é¢˜
 	if (cmd.find("{%wt}") != wxNOT_FOUND)
 		cmd.Replace("{%wt}",g_controller->GetWindowText(g_controller->GetForegroundWindow()));
 
@@ -816,7 +816,7 @@ DWORD RunCMD(const wxString& cmdLine,const wxString& cmdArg,const wxString& work
 		argt = wxT(' ') + cmdArg;
 
 	cmd = ParseCmd(cmd,&arg,workDir);
-	if (cmd.empty())//Ã»ÓĞÕÒµ½ÃüÁî
+	if (cmd.empty())//æ²¡æœ‰æ‰¾åˆ°å‘½ä»¤
 	{
 		winexec = true;
 		cmd = cmdLine;
@@ -845,21 +845,21 @@ static int AddALTRunCMD(lua_State *L)
 		return 0;
 	int it = lua_gettop(L);
 
-	lua_rawgeti(L,it,3);//¿ì½İÃû
+	lua_rawgeti(L,it,3);//å¿«æ·å
 	wxString commandName(wxString(lua_tostring(L, -1), wxConvLocal));
 
-	lua_rawgeti(L,it,4);//±¸×¢
+	lua_rawgeti(L,it,4);//å¤‡æ³¨
 	wxString commandDesc(wxString(lua_tostring(L, -1), wxConvLocal));
 
-	lua_rawgeti(L,it,5);//ÃüÁî
+	lua_rawgeti(L,it,5);//å‘½ä»¤
 	wxString commandLine(wxString(lua_tostring(L, -1), wxConvLocal));
 
-	lua_rawgeti(L,it,2);//²ÎÊı±àÂë
+	lua_rawgeti(L,it,2);//å‚æ•°ç¼–ç 
 	wxString commandParam(wxString(lua_tostring(L, -1), wxConvLocal));
 
-	lua_settop(L,it);//»Ö¸´
+	lua_settop(L,it);//æ¢å¤
 
-	if (!commandParam.Trim(false).empty())//Èç¹ûĞèÒª²ÎÊı£¬¼ÓÉÏÇ¿ÖÆ²ÎÊı±êÖ¾
+	if (!commandParam.Trim(false).empty())//å¦‚æœéœ€è¦å‚æ•°ï¼ŒåŠ ä¸Šå¼ºåˆ¶å‚æ•°æ ‡å¿—
 		commandLine.insert(0,'+');
 	if (g_config->AddCmd(commandLine,commandName,wxEmptyString,commandDesc) > 0)
 		return 1;
@@ -867,27 +867,27 @@ static int AddALTRunCMD(lua_State *L)
 	return 0;
 }
 /*
-	ÃüÁîµ¼Èëº¯Êı,Ä¿Ç°Ö»Ö§³ÖALTRUNÅäÖÃÎÄ¼ş,ÎÄ¼şÃûSHORTCUTLIST.txt
+	å‘½ä»¤å¯¼å…¥å‡½æ•°,ç›®å‰åªæ”¯æŒALTRUNé…ç½®æ–‡ä»¶,æ–‡ä»¶åSHORTCUTLIST.txt
 */
 int importCMD(wxString& filename)
 {
 	if (!g_lua || !g_config)
 		return -1;
 	if (wxFileNameFromPath(filename).Upper().StartsWith("SHORTCUTLIST.") == false || 
-		wxMessageBox("¸ÃÎÄ¼ş¿ÉÄÜÊÇALTRunµÄÅäÖÃÎÄ¼ş£¬ÊÇ·ñµ¼ÈëÃüÁî?","ALTRunÃüÁîµ¼ÈëÌáÊ¾",wxYES_NO|wxICON_INFORMATION) != wxYES)
+		wxMessageBox("è¯¥æ–‡ä»¶å¯èƒ½æ˜¯ALTRunçš„é…ç½®æ–‡ä»¶ï¼Œæ˜¯å¦å¯¼å…¥å‘½ä»¤?","ALTRunå‘½ä»¤å¯¼å…¥æç¤º",wxYES_NO|wxICON_INFORMATION) != wxYES)
 		return -1;
 	lua_State *L = g_lua->GetLua();
 
 	if (!g_lua->get_func(LUA_ReadALTRunConfig_FUNC))
 	{
-		wxMessageBox("¸Ã¹¦ÄÜËùĞèÒªµÄLUAº¯Êı²»´æÔÚ£¬ÇëÈ·ÈÏLuaEx\\base.luaÎÄ¼ş´æÔÚ","´íÎó");
+		wxMessageBox("è¯¥åŠŸèƒ½æ‰€éœ€è¦çš„LUAå‡½æ•°ä¸å­˜åœ¨ï¼Œè¯·ç¡®è®¤LuaEx\\base.luaæ–‡ä»¶å­˜åœ¨","é”™è¯¯");
 		return 0;
 	}
 
 	lua_pushstring(L,filename.c_str());
 	if (lua_pcall(L, 1, 1, 0) || !lua_istable(L,-1))
 	{
-		wxMessageBox("LUA½Å±¾Ö´ĞĞÓĞÎó£¬»ò·µ»ØÖµ²»¶Ô");
+		wxMessageBox("LUAè„šæœ¬æ‰§è¡Œæœ‰è¯¯ï¼Œæˆ–è¿”å›å€¼ä¸å¯¹");
 		lua_pop(L, 1);
 		return 0;
 	}
@@ -904,7 +904,7 @@ int importCMD(wxString& filename)
 		lua_pop(L, 1);
 	}
 	lua_pop(L,1);
-	wxMessageBox(wxString::Format("³É¹¦µ¼Èë%d¸öÃüÁî,Ê§°Ü%d¸ö!",success,failure));
+	wxMessageBox(wxString::Format("æˆåŠŸå¯¼å…¥%dä¸ªå‘½ä»¤,å¤±è´¥%dä¸ª!",success,failure));
 	return success;
 }
 

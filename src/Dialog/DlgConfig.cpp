@@ -145,12 +145,12 @@ void DlgConfig::CreateControls()
     itemDialog1->SetSizer(itemBoxSizer2);
 
 
-	wxStaticBox* itemStaticBoxSizer1Static = new wxStaticBox(itemDialog1, wxID_ANY,"³ÌĞòÈÈ¼ü");
+	wxStaticBox* itemStaticBoxSizer1Static = new wxStaticBox(itemDialog1, wxID_ANY,"ç¨‹åºçƒ­é”®");
 	wxStaticBoxSizer* itemStaticBoxSizer4 = new wxStaticBoxSizer(itemStaticBoxSizer1Static,wxVERTICAL);
 	wxBoxSizer* itemBoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
     itemStaticBoxSizer4->Add(itemBoxSizer3, 0, wxGROW|wxALL, 5);
 
-    wxStaticText* itemStaticText4 = new wxStaticText( itemStaticBoxSizer4->GetStaticBox(), wxID_STATIC, _("ÏÔÒşÈÈ¼ü:"), wxDefaultPosition, wxDefaultSize, 0 );
+    wxStaticText* itemStaticText4 = new wxStaticText( itemStaticBoxSizer4->GetStaticBox(), wxID_STATIC, _("æ˜¾éšçƒ­é”®:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer3->Add(itemStaticText4, 0, wxALIGN_TOP|wxALL, 5);
 
     config_hotkey = new HotkeyCtrl( itemStaticBoxSizer4->GetStaticBox(), ID_TEXTCTRL, wxEmptyString, wxDefaultPosition,wxSize(150, -1));
@@ -158,33 +158,33 @@ void DlgConfig::CreateControls()
 
     itemBoxSizer2->Add(itemStaticBoxSizer4, 0, wxGROW|wxALL, 5);
 
-	wxStaticBox* itemStaticBoxSizer3Static = new wxStaticBox(itemDialog1, wxID_ANY, "»ù±¾ÅäÖÃ");
+	wxStaticBox* itemStaticBoxSizer3Static = new wxStaticBox(itemDialog1, wxID_ANY, "åŸºæœ¬é…ç½®");
     wxStaticBoxSizer* itemStaticBoxSizer3 = new wxStaticBoxSizer(itemStaticBoxSizer3Static, wxVERTICAL);
     itemBoxSizer2->Add(itemStaticBoxSizer3, 0, wxGROW|wxALL, 5);
     wxArrayString configStrings;
-	configStrings.Add("ËæÏµÍ³×Ô¶¯Æô¶¯");
-	configStrings.Add("±£³Ö´°¿ÚÖÃ¶¥");
-    configStrings.Add("ÔÊĞíÊı×Ö¿ì½İ¼ü");
-    configStrings.Add("ÏÔÊ¾ÍĞÅÌÍ¼±ê");
-    configStrings.Add("½öÏÔÊ¾Ç°10Ïî");
-	configStrings.Add("ÏÔÊ¾ÃüÁîĞĞ");
-    configStrings.Add("½öÊ£Ò»ÏîÊ±Á¢¼´Ö´ĞĞ");
-	configStrings.Add("±£´æ×î½üÒ»´ÎÆ¥Åä");
-	configStrings.Add("´ÓÈÎÒâÎ»ÖÃÆ¥Åä¹Ø¼ü×Ö");
-    configStrings.Add("Êı×ÖĞòÁĞË³Ğò = 0, 1, ..., 8, 9");
-    configStrings.Add("Ç°ê¡Æ¥ÅäÓÅÏÈ");
-	configStrings.Add("ÏÔÊ¾ÃüÁîÌáÊ¾ĞÅÏ¢");
-	configStrings.Add("½ûÓÃWOW64ÎÄ¼şÏµÍ³ÖØ¶¨Ïò");
-	configStrings.Add("Ìí¼Óµ½<·¢ËÍµ½>²Ëµ¥");
-	configStrings.Add("Ö÷´°Ìåµ¯³öÊ±²¥·ÅÉùÒô");
-	configStrings.Add("°´¿Õ¸ñ¼üÖ´ĞĞ");
-	configStrings.Add("Ö÷´°Ìåµ¯³öÊ±ÏÔÊ¾ÁĞ±í");
-	configStrings.Add("°´Á½´Î³ÌĞòÈÈ¼üÖØ¸´Ö´ĞĞÉÏÒ»¸öÃüÁî");
-	configStrings.Add("Êó±êË«»÷ÔËĞĞ");
-	configStrings.Add("ÔÊĞíÃüÁîÃûÖØ¸´");
-	configStrings.Add("½ûÖ¹Í¬Ò»ÃüÁî¶à´ÎÔËĞĞ");
-	configStrings.Add("¿ì½İ·½Ê½¶ÁÈ¡Ä¿±êÊôĞÔ");
-	configStrings.Add("±£´æ´°¿ÚÎ»ÖÃ");
+	configStrings.Add("éšç³»ç»Ÿè‡ªåŠ¨å¯åŠ¨");
+	configStrings.Add("ä¿æŒçª—å£ç½®é¡¶");
+    configStrings.Add("å…è®¸æ•°å­—å¿«æ·é”®");
+    configStrings.Add("æ˜¾ç¤ºæ‰˜ç›˜å›¾æ ‡");
+    configStrings.Add("ä»…æ˜¾ç¤ºå‰10é¡¹");
+	configStrings.Add("æ˜¾ç¤ºå‘½ä»¤è¡Œ");
+    configStrings.Add("ä»…å‰©ä¸€é¡¹æ—¶ç«‹å³æ‰§è¡Œ");
+	configStrings.Add("ä¿å­˜æœ€è¿‘ä¸€æ¬¡åŒ¹é…");
+	configStrings.Add("ä»ä»»æ„ä½ç½®åŒ¹é…å…³é”®å­—");
+    configStrings.Add("æ•°å­—åºåˆ—é¡ºåº = 0, 1, ..., 8, 9");
+    configStrings.Add("å‰è¾åŒ¹é…ä¼˜å…ˆ");
+	configStrings.Add("æ˜¾ç¤ºå‘½ä»¤æç¤ºä¿¡æ¯");
+	configStrings.Add("ç¦ç”¨WOW64æ–‡ä»¶ç³»ç»Ÿé‡å®šå‘");
+	configStrings.Add("æ·»åŠ åˆ°<å‘é€åˆ°>èœå•");
+	configStrings.Add("ä¸»çª—ä½“å¼¹å‡ºæ—¶æ’­æ”¾å£°éŸ³");
+	configStrings.Add("æŒ‰ç©ºæ ¼é”®æ‰§è¡Œ");
+	configStrings.Add("ä¸»çª—ä½“å¼¹å‡ºæ—¶æ˜¾ç¤ºåˆ—è¡¨");
+	configStrings.Add("æŒ‰ä¸¤æ¬¡ç¨‹åºçƒ­é”®é‡å¤æ‰§è¡Œä¸Šä¸€ä¸ªå‘½ä»¤");
+	configStrings.Add("é¼ æ ‡åŒå‡»è¿è¡Œ");
+	configStrings.Add("å…è®¸å‘½ä»¤åé‡å¤");
+	configStrings.Add("ç¦æ­¢åŒä¸€å‘½ä»¤å¤šæ¬¡è¿è¡Œ");
+	configStrings.Add("å¿«æ·æ–¹å¼è¯»å–ç›®æ ‡å±æ€§");
+	configStrings.Add("ä¿å­˜çª—å£ä½ç½®");
     config = new wxCheckListBox(itemStaticBoxSizer3->GetStaticBox(), ID_CHECKLISTBOX, wxDefaultPosition, wxDefaultSize, configStrings, 0 );
 	config_tip = new wxStaticText( itemStaticBoxSizer3->GetStaticBox(), wxID_STATIC,wxEmptyString, wxDefaultPosition, wxSize(-1,50), wxALIGN_LEFT|wxST_NO_AUTORESIZE|wxNO_BORDER);
 	config_tip->SetForegroundColour(wxColour(255, 0, 255));
@@ -193,11 +193,11 @@ void DlgConfig::CreateControls()
 	wxStdDialogButtonSizer* itemStdDialogButtonSizer6 = new wxStdDialogButtonSizer;
 
    itemBoxSizer2->Add(itemStdDialogButtonSizer6, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5);
-    wxButton* itemButton7 = new wxButton( itemDialog1, wxID_OK, _("¸üĞÂ(&O)"), wxDefaultPosition, wxDefaultSize, 0 );
+    wxButton* itemButton7 = new wxButton( itemDialog1, wxID_OK, _("æ›´æ–°(&O)"), wxDefaultPosition, wxDefaultSize, 0 );
 	itemButton7->SetDefault();
     itemStdDialogButtonSizer6->AddButton(itemButton7);
 
-    wxButton* itemButton8 = new wxButton( itemDialog1, wxID_CANCEL, _("È¡Ïû(&C)"), wxDefaultPosition, wxDefaultSize, 0 );
+    wxButton* itemButton8 = new wxButton( itemDialog1, wxID_CANCEL, _("å–æ¶ˆ(&C)"), wxDefaultPosition, wxDefaultSize, 0 );
     itemStdDialogButtonSizer6->AddButton(itemButton8);
 	itemButton8->SetFocus();
 

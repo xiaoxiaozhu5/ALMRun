@@ -22,13 +22,13 @@ MerryListBoxPanel::MerryListBoxPanel(wxWindow* parent):
 	m_selectionCommandIndex = -1;
 	m_isPopup = false;
 
-//ÖØÐÂÉèÖÃÁÐ±í¿òÎ»ÖÃÐÅÏ¢
+//é‡æ–°è®¾ç½®åˆ—è¡¨æ¡†ä½ç½®ä¿¡æ¯
 	wxPoint pos(skin->get(LIST_BOX_LEFT),skin->get(LIST_BOX_TOP));
 	if (pos.y == 0)
 		pos.y = parent->GetClientSize().y;
 	this->SetPosition(pos);
 
-//ÉèÖÃÁÐ±í¿ò¿í¶È
+//è®¾ç½®åˆ—è¡¨æ¡†å®½åº¦
 	if (skin->get(LIST_BOX_WIDTH))
 		this->SetSize(skin->get(LIST_BOX_WIDTH),0);
 
@@ -86,7 +86,7 @@ void MerryListBoxPanel::SetCommandArray(const MerryCommandArray& commands)
 	}
 	m_topCommandIndex = 0;
 	m_selectionCommandIndex = 0;
-	/* ×Ô¶¯Ñ¡ÖÐÇ°Ò»¸öÆ¥ÅäµÄÃüÁî,¸Ð¾õÓÐµã¶àÓà,ÐÂµÄ°æ±¾È¡ÏûÁË.
+	/* è‡ªåŠ¨é€‰ä¸­å‰ä¸€ä¸ªåŒ¹é…çš„å‘½ä»¤,æ„Ÿè§‰æœ‰ç‚¹å¤šä½™,æ–°çš„ç‰ˆæœ¬å–æ¶ˆäº†.
 	if (!cmd)
 		return;
 	int	PreCmdID = cmd->GetCommandID();
@@ -156,7 +156,7 @@ bool MerryListBoxPanel::DelSelectedItem()
 	int flags = cmd->GetFlags();
 	if ((flags & CMDS_FLAG_CMDS))
 	{
-		if (wxMessageBox(wxString::Format("É¾³ý ID:[%d] %s\nÃüÁî:%s?",flags >> 4,cmd->GetCommandName(),cmd->GetCmd()),"ÌáÊ¾",wxYES_NO|wxICON_WARNING) != wxYES)
+		if (wxMessageBox(wxString::Format("åˆ é™¤ ID:[%d] %s\nå‘½ä»¤:%s?",flags >> 4,cmd->GetCommandName(),cmd->GetCmd()),"æç¤º",wxYES_NO|wxICON_WARNING) != wxYES)
 			return false;
 	#ifdef _ALMRUN_CONFIG_H_
 		if (g_config->DeleteCmd(flags>>4))
@@ -164,7 +164,7 @@ bool MerryListBoxPanel::DelSelectedItem()
 			return g_commands->DelCommand(cmd->GetCommandID());
 	}
 	else
-		wxMessageBox("¸ÃÃüÁî¿ÉÄÜÊÇLUA½Å±¾»ò×Ô¶¯Éú³ÉµÄÃüÁî,ÎÞ·¨É¾³ý");
+		wxMessageBox("è¯¥å‘½ä»¤å¯èƒ½æ˜¯LUAè„šæœ¬æˆ–è‡ªåŠ¨ç”Ÿæˆçš„å‘½ä»¤,æ— æ³•åˆ é™¤");
 	return false;
 }
 
@@ -196,15 +196,15 @@ void  MerryListBoxPanel::onContextMenu(wxContextMenuEvent& e)
 	const MerryCommand* cmd = GetSelectionCommand();
 
 	wxMenu menu;
-	menu.Append(MENU_CMD_ADD, wxT("Ìí¼Ó(&I)"));
-	menu.Append(MENU_CMD_EDIT, wxT("±à¼­(&E)"));
+	menu.Append(MENU_CMD_ADD, wxT("æ·»åŠ (&I)"));
+	menu.Append(MENU_CMD_EDIT, wxT("ç¼–è¾‘(&E)"));
 	if ((cmd->GetFlags() & CMDS_FLAG_CMDS))
 	{
-		menu.Append(MENU_CMD_DEL, wxT("É¾³ý(&D)"));
+		menu.Append(MENU_CMD_DEL, wxT("åˆ é™¤(&D)"));
 	}
-	menu.Append(MENU_CMD_OPENDIR, wxT("¶¨Î»(&L)"));
-	menu.Append(MENU_CMD_INFO, wxT("ÏêÇé(&M)"));
-	menu.Append(MENU_CMD_RUNAS, wxT("ÔËÐÐÎª(&A)"));
+	menu.Append(MENU_CMD_OPENDIR, wxT("å®šä½(&L)"));
+	menu.Append(MENU_CMD_INFO, wxT("è¯¦æƒ…(&M)"));
+	menu.Append(MENU_CMD_RUNAS, wxT("è¿è¡Œä¸º(&A)"));
 
 	PopupMenu(&menu);
 }
@@ -237,7 +237,7 @@ void MerryListBoxPanel::onPopMenu(wxCommandEvent& e)
 					const MerryCommand* cmd = GetSelectionCommand();
 					if (!(cmd->GetFlags() & CMDS_FLAG_CMDS)) 
 					{
-						wxMessageBox("¸ÃÃüÁî¿ÉÄÜÊÇLUA½Å±¾»ò×Ô¶¯Éú³ÉµÄÃüÁî,¼ÌÐø±à¼­½«»á×Ô¶¯×ªÎªALMRun³£¹æÃüÁî","ÌáÊ¾");
+						wxMessageBox("è¯¥å‘½ä»¤å¯èƒ½æ˜¯LUAè„šæœ¬æˆ–è‡ªåŠ¨ç”Ÿæˆçš„å‘½ä»¤,ç»§ç»­ç¼–è¾‘å°†ä¼šè‡ªåŠ¨è½¬ä¸ºALMRunå¸¸è§„å‘½ä»¤","æç¤º");
 						dlg = new DlgAddNewCmd();
 						dlg->cmdName->SetValue(cmd->GetCommandName());
 						dlg->cmdDesc->SetValue(cmd->GetCommandDesc());
@@ -482,16 +482,16 @@ void MerryListBoxPanel::DrawItems(MerryPaintDC& dc)
 
 		if (this->flags > 0)
 		{
-			title = "  ÊäÈëÃüÁî²ÎÊý°´»Ø³µÖ´ÐÐ»ò°´Esc¼ü·µ»Ø";
+			title = "  è¾“å…¥å‘½ä»¤å‚æ•°æŒ‰å›žè½¦æ‰§è¡Œæˆ–æŒ‰Escé”®è¿”å›ž";
 			this->flags = 0;
 		}else {
 	#ifdef _RELWITHDEBINFO
-			title = wxString::Format(wxT(" ÃüÁî[%d]: %s"),command->GetOrder(),cmdLine.c_str());
+			title = wxString::Format(wxT(" å‘½ä»¤[%d]: %s"),command->GetOrder(),cmdLine.c_str());
 	#else
 		if (!cmdLine.empty())
-			title = wxString::Format(wxT("ÃüÁî: %s"),cmdLine.c_str());
+			title = wxString::Format(wxT("å‘½ä»¤: %s"),cmdLine.c_str());
 		else if (!cmdDesc.empty())
-			title = wxString::Format(wxT("ËµÃ÷: %s"),cmdDesc.c_str());	
+			title = wxString::Format(wxT("è¯´æ˜Ž: %s"),cmdDesc.c_str());	
 	#endif
 		}
 		dc.SetBrush(wxBrush(skin->get(TEXT_BACKCOLOR)));

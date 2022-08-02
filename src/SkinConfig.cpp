@@ -20,7 +20,7 @@ SkinConfig::SkinConfig()
 	//default custom config;
 	custom[DEFAULT_TITLE] =wxT("ALMRun");
 	custom[LIST_FMT] = "$$. $N";
-	custom[SKIN_FONT]="ËÎÌå";
+	custom[SKIN_FONT]="ïž©ïž¬ïžª×•";
 	skin_name = "merry";
 
 	read_config();

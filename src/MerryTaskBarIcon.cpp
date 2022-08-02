@@ -19,13 +19,13 @@ wxMenu* MerryTaskBarIcon::CreatePopupMenu()
 {
 	wxMenu* menu = new wxMenu;
 
-	menu->Append(MENU_ITEM_SHOW, wxT("ÏÔÊ¾½çÃæ(&O)"));
-	menu->Append(MENU_ITEM_GUI_CONFIG, wxT("²ÎÊıÅäÖÃ(&C)"));
-	menu->Append(MENU_ITEM_CMDMGR, wxT("ÃüÁî¹ÜÀí(&S)"));
-	menu->Append(MENU_ITEM_OPEN_CONFIG, wxT("³ÌĞòÄ¿Â¼(&S)"));
-	menu->Append(MENU_ITEM_RECONFIG, wxT("Ë¢ĞÂÅäÖÃ(R)"));
-	menu->Append(MENU_ITEM_ABOUT, wxT("¹ØÓÚALMRun(&A)"));
-	menu->Append(MENU_ITEM_EXIT1, wxT("ÍË³ö(&X)"));
+	menu->Append(MENU_ITEM_SHOW, wxT("æ˜¾ç¤ºç•Œé¢(&O)"));
+	menu->Append(MENU_ITEM_GUI_CONFIG, wxT("å‚æ•°é…ç½®(&C)"));
+	menu->Append(MENU_ITEM_CMDMGR, wxT("å‘½ä»¤ç®¡ç†(&S)"));
+	menu->Append(MENU_ITEM_OPEN_CONFIG, wxT("ç¨‹åºç›®å½•(&S)"));
+	menu->Append(MENU_ITEM_RECONFIG, wxT("åˆ·æ–°é…ç½®(R)"));
+	menu->Append(MENU_ITEM_ABOUT, wxT("å…³äºALMRun(&A)"));
+	menu->Append(MENU_ITEM_EXIT1, wxT("é€€å‡º(&X)"));
 
 	return menu;
 }
@@ -36,16 +36,16 @@ void MerryTaskBarIcon::onPopMenu(wxCommandEvent& e)
 	{
 		case MENU_ITEM_SKIN:
 			{
-				wxString file = wxFileSelector("ÇëÑ¡Ôñ","skin/",wxEmptyString,wxT(".skn"),"*.skn",0);
+				wxString file = wxFileSelector("è¯·é€‰æ‹©","skin/",wxEmptyString,wxT(".skn"),"*.skn",0);
 				if (file.IsEmpty())
 					break;
 				wxFileName fn(file);
 				if (g_config->set("skin",fn.GetName()))
-					wxMessageBox("Ä¿Ç°µÄ°æ±¾ÉĞÎ´ÍêÉÆ,ĞŞ¸ÄÖ÷ÌâĞèÒªÖØĞÂÆô¶¯³ÌĞò²ÅÄÜ¿´µ½Ğ§¹û,ÇëÖØÆô³ÌĞò.","ÇĞ»»Ö÷Ìâ");
+					wxMessageBox("ç›®å‰çš„ç‰ˆæœ¬å°šæœªå®Œå–„,ä¿®æ”¹ä¸»é¢˜éœ€è¦é‡æ–°å¯åŠ¨ç¨‹åºæ‰èƒ½çœ‹åˆ°æ•ˆæœ,è¯·é‡å¯ç¨‹åº.","åˆ‡æ¢ä¸»é¢˜");
 			}
 			break;
 		case MENU_ITEM_ABOUT:
-			new MerryInformationDialog(wxT("¹ØÓÚ ALMRun"),wxString::Format("version " VERSION_STR " --- http://ALMRun.chenall.net\r\nÏà¹Ø×ÊÔ´:\r\nÔ­°æ: http://name5566.com\r\nÖ÷Ìâ: http://executor.dk/\r\nÔ´Âë: https://github.com/chenall/almrun\r\n\r\n±àÒëÊ±¼ä:%s %s",__DATE__,__TIME__));
+			new MerryInformationDialog(wxT("å…³äº ALMRun"),wxString::Format("version " VERSION_STR " --- http://ALMRun.chenall.net\r\nç›¸å…³èµ„æº:\r\nåŸç‰ˆ: http://name5566.com\r\nä¸»é¢˜: http://executor.dk/\r\næºç : https://github.com/chenall/almrun\r\n\r\nç¼–è¯‘æ—¶é—´:%s %s",__DATE__,__TIME__));
 			break;
 		case MENU_ITEM_SHOW:
 			::wxGetApp().GetFrame().Show();

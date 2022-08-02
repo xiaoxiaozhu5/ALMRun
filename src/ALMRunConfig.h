@@ -6,7 +6,7 @@
 #include "SkinConfig.h"
 #include <wx/fileconf.h>
 
-#define TASKBARICON_TIP "ALMRun v"##VERSION_STR##"\n便捷启动工具"
+#define TASKBARICON_TIP "ALMRun v"##VERSION_STR##"\n卤茫陆脻脝么露炉鹿陇戮脽"
 #define CONFIG_VERSION 2
 #define FAVORITELIST_FILE wxT("config/FavoriteList.txt")
 #define ParamHistoryLimit_default 50

@@ -20,7 +20,7 @@ END_EVENT_TABLE()
 		virtual bool OnDropFiles(wxCoord x, wxCoord y,
 								 const wxArrayString& filenames);
 	private:
-		//¶Ô»°¿òÀà£¬³ÉÔ±TextCtrlPath±£´æÎÄ¼þÂ·¾¶
+		//å¯¹è¯æ¡†ç±»ï¼Œæˆå‘˜TextCtrlPathä¿å­˜æ–‡ä»¶è·¯å¾„
 		DlgParam *m_pOwner;
  
 	};
@@ -63,12 +63,12 @@ DlgParam::DlgParam( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	comboBox->AutoComplete(new MyTextCompleter(comboBox));
 	comboBox->SetSelection(0);
 	comboBox->Bind(wxEVT_KEY_DOWN,&DlgParam::OnKey,this);
-	comboBox->SetToolTip("ÌáÊ¾: \n1.Ñ¡ÖÐÒ»¸öÀúÊ·¼ÇÂ¼°´Alt+Delete¿ÉÒÔÉ¾³ý.\n2.°´[Alt+F]¿ÉÒÔ²åÈëÒ»¸öÎÄ¼þÂ·¾¶.\n3.°´[Alt+D]¿ÉÒÔ²åÈëÒ»¸öÎÄ¼þ¼ÐÂ·¾¶");
+	comboBox->SetToolTip("æç¤º: \n1.é€‰ä¸­ä¸€ä¸ªåŽ†å²è®°å½•æŒ‰Alt+Deleteå¯ä»¥åˆ é™¤.\n2.æŒ‰[Alt+F]å¯ä»¥æ’å…¥ä¸€ä¸ªæ–‡ä»¶è·¯å¾„.\n3.æŒ‰[Alt+D]å¯ä»¥æ’å…¥ä¸€ä¸ªæ–‡ä»¶å¤¹è·¯å¾„");
 
 	bSizer2->Add(comboBox, 0, wxALL, 5 );
 
-	wxButton* ButtonOk = new wxButton(this,wxID_OK,"È·¶¨(&O)",wxDefaultPosition,wxDefaultSize);
-	wxButton* ButtonCancel = new wxButton(this,wxID_CANCEL,"È¡Ïû(&O)",wxDefaultPosition,wxDefaultSize);
+	wxButton* ButtonOk = new wxButton(this,wxID_OK,"ç¡®å®š(&O)",wxDefaultPosition,wxDefaultSize);
+	wxButton* ButtonCancel = new wxButton(this,wxID_CANCEL,"å–æ¶ˆ(&O)",wxDefaultPosition,wxDefaultSize);
 	ButtonOk->SetDefault();
 	bSizer2->Add(ButtonOk,0,wxALL,5);
 	bSizer2->Add(ButtonCancel,0,wxALL,5);
@@ -94,7 +94,7 @@ void DlgParam::OnKey(wxKeyEvent& e)
 			int i = m_array.Index(comboBox->GetValue());
 			if (i != wxNOT_FOUND)
 			{
-				if (wxMessageBox(wxString::Format("È·¶¨ÒªÉ¾³ý²ÎÊýÀúÊ·¼ÇÂ¼:\n [ %s ]",comboBox->GetValue()),"ÌáÊ¾",wxYES_NO|wxICON_WARNING) == wxYES)
+				if (wxMessageBox(wxString::Format("ç¡®å®šè¦åˆ é™¤å‚æ•°åŽ†å²è®°å½•:\n [ %s ]",comboBox->GetValue()),"æç¤º",wxYES_NO|wxICON_WARNING) == wxYES)
 				{
 					m_array.RemoveAt(i);
 					tfile.RemoveLine(i);
@@ -105,9 +105,9 @@ void DlgParam::OnKey(wxKeyEvent& e)
 			}
 		}
 		else if (key == 'F')
-			path = wxFileSelector("ÇëÑ¡ÔñÒ»¸öÎÄ¼þ",wxEmptyString,wxEmptyString,wxEmptyString,wxFileSelectorDefaultWildcardStr,0,this);
+			path = wxFileSelector("è¯·é€‰æ‹©ä¸€ä¸ªæ–‡ä»¶",wxEmptyString,wxEmptyString,wxEmptyString,wxFileSelectorDefaultWildcardStr,0,this);
 		else if (key == 'D')
-			path = wxDirSelector("ÇëÑ¡ÔñÒ»¸öÄ¿Â¼",wxEmptyString,0,wxDefaultPosition,this);
+			path = wxDirSelector("è¯·é€‰æ‹©ä¸€ä¸ªç›®å½•",wxEmptyString,0,wxDefaultPosition,this);
 		if (!path.empty())
 		{
 			wxString str = comboBox->GetValue();

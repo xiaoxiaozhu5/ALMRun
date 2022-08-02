@@ -13,12 +13,12 @@ MerryMainPanel::MerryMainPanel(wxWindow* parent):
 {
 	m_textCtrl = new MerryTextCtrl(this);
 	menu = new wxMenu;
-	menu->Append(MENU_ITEM_GUI_CONFIG, wxT("²ÎÊýÅäÖÃ(&C)"));
-	menu->Append(MENU_ITEM_CMDMGR, wxT("ÃüÁî¹ÜÀí(&S)"));
-	menu->Append(MENU_ITEM_SKIN,wxT("ÇÐ»»Ö÷Ìâ"));
-	menu->Append(MENU_ITEM_RECONFIG, wxT("Ë¢ÐÂÅäÖÃ(R)"));
-	menu->Append(MENU_ITEM_ABOUT, wxT("¹ØÓÚALMRun(&A)"));
-	menu->Append(MENU_ITEM_EXIT, wxT("ÍË³ö(&X)"));
+	menu->Append(MENU_ITEM_GUI_CONFIG, wxT("å‚æ•°é…ç½®(&C)"));
+	menu->Append(MENU_ITEM_CMDMGR, wxT("å‘½ä»¤ç®¡ç†(&S)"));
+	menu->Append(MENU_ITEM_SKIN,wxT("åˆ‡æ¢ä¸»é¢˜"));
+	menu->Append(MENU_ITEM_RECONFIG, wxT("åˆ·æ–°é…ç½®(R)"));
+	menu->Append(MENU_ITEM_ABOUT, wxT("å…³äºŽALMRun(&A)"));
+	menu->Append(MENU_ITEM_EXIT, wxT("é€€å‡º(&X)"));
 	if (skin->get(TITLE_ENABLED))
 	{
 		title_cfg.x = skin->get(TITLE_LEFT);

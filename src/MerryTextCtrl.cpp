@@ -65,7 +65,7 @@ MerryTextCtrl::MerryTextCtrl(wxWindow* parent):
 	reg.GetKeyInfo(NULL,NULL,&max_Keys,NULL);
 	wxString Value;
 	wxString tmp;
-	//Windows 8 00000804 ÊÇÖÐÎÄÊäÈë·¨
+	//Windows 8 00000804 æ˜¯ä¸­æ–‡è¾“å…¥æ³•
 	DWORD winver = ::GetVersion()&0xFFFF;
 	winver = ((winver & 0xff)<<8) | winver>>8;
 	bool isWin8 = winver > wxWinVersion_7;
@@ -76,7 +76,7 @@ MerryTextCtrl::MerryTextCtrl(wxWindow* parent):
 		{
 			if (tmp == "00000409" || tmp == "00000809" || (isWin8 && tmp == "00000804"))
 			{
-				hkl = ::LoadKeyboardLayout(tmp,KLF_ACTIVATE);//ÓÐÕÒµ½µÄÓ¢ÎÄ¼üÅÌ,¾Í×°ÔØËü
+				hkl = ::LoadKeyboardLayout(tmp,KLF_ACTIVATE);//æœ‰æ‰¾åˆ°çš„è‹±æ–‡é”®ç›˜,å°±è£…è½½å®ƒ
 				break;
 			}
 		}
@@ -118,15 +118,15 @@ void MerryTextCtrl::SetEnInputMode(void)
 	HWND hwnd = this->GetHWND();
 	hImc = ImmGetContext(hwnd);
 	/*
-	IME_CMODE_FULLSHAPE	È«½Ç
-	IME_CMODE_SYMBOL	ÖÐÎÄ±êµã
-	IME_CMODE_NATIVE	Ó¢ÎÄ
+	IME_CMODE_FULLSHAPE	å…¨è§’
+	IME_CMODE_SYMBOL	ä¸­æ–‡æ ‡ç‚¹
+	IME_CMODE_NATIVE	è‹±æ–‡
 	*/
-	if (ImmGetOpenStatus(hImc)) // ÊäÈë·¨ÊÇ´ò¿ª×´Ì¬
+	if (ImmGetOpenStatus(hImc)) // è¾“å…¥æ³•æ˜¯æ‰“å¼€çŠ¶æ€
 	{
 		DWORD dwConv, dwSent;
-		ImmGetConversionStatus(hImc, &dwConv, &dwSent);//»ñÈ¡ÊäÈë·¨×´Ì¬
-		dwConv &= ~(IME_CMODE_NATIVE| IME_CMODE_SYMBOL| IME_CMODE_FULLSHAPE);//ÉèÖÃÎª°ë½ÇÓ¢ÎÄÄ£Ê½.
+		ImmGetConversionStatus(hImc, &dwConv, &dwSent);//èŽ·å–è¾“å…¥æ³•çŠ¶æ€
+		dwConv &= ~(IME_CMODE_NATIVE| IME_CMODE_SYMBOL| IME_CMODE_FULLSHAPE);//è®¾ç½®ä¸ºåŠè§’è‹±æ–‡æ¨¡å¼.
 		ImmSetConversionStatus(hImc, dwConv, dwSent);
 	}
 	ImmReleaseContext(hwnd, hImc);
@@ -148,13 +148,13 @@ void MerryTextCtrl::OnKeyDownEvent(wxKeyEvent& e)
 
 		switch(key)
 		{
-			case 'c':// Alt+C ºô³öÅäÖÃÉè¶¨½çÃæ¡£
+			case 'c':// Alt+C å‘¼å‡ºé…ç½®è®¾å®šç•Œé¢ã€‚
 				menu_id = MENU_ITEM_GUI_CONFIG;
 				break;
-			case 's'://Alt+S ºô³ö¿ì½ÝÏî¹ÜÀí½çÃæ£»
+			case 's'://Alt+S å‘¼å‡ºå¿«æ·é¡¹ç®¡ç†ç•Œé¢ï¼›
 				menu_id = MENU_ITEM_CMDMGR;
 				break;
-			case 'x'://Alt+X ÍË³ö
+			case 'x'://Alt+X é€€å‡º
 				menu_id = MENU_ITEM_EXIT;
 				break;
 		}
@@ -206,10 +206,10 @@ void MerryTextCtrl::OnKeyDownEvent(wxKeyEvent& e)
 #endif
 
 #ifdef _ALMRUN_CONFIG_H_
-		//°´¿Õ¸ñ¼üÖ´ÐÐ
+		//æŒ‰ç©ºæ ¼é”®æ‰§è¡Œ
 		else if (keyCode == WXK_SPACE && EnterArgs == 0)
 		{
-			//¶ÔÓÚ²å¼þÃüÁî,°´¿Õ¸ñÖ®ºó½øÈë²å¼þÃüÁîÄ£Ê½.
+			//å¯¹äºŽæ’ä»¶å‘½ä»¤,æŒ‰ç©ºæ ¼ä¹‹åŽè¿›å…¥æ’ä»¶å‘½ä»¤æ¨¡å¼.
 			if (SelectedCMD->GetFlags() == CMDS_FLAG_PLUGIN)
 				this->SetPluginMode(SelectedCMD);
 			else if (g_config->get(SpaceKey))
@@ -225,18 +225,18 @@ void MerryTextCtrl::OnKeyDownEvent(wxKeyEvent& e)
 			this->ExecuteCmd();
 			break;
 		case WXK_ESCAPE:
-			if (this->EnterArgs>0)//µ±Ç°ÊÇÊäÈë²ÎÊýÄ£Ê½,°´EscÈ¡Ïû
+			if (this->EnterArgs>0)//å½“å‰æ˜¯è¾“å…¥å‚æ•°æ¨¡å¼,æŒ‰Escå–æ¶ˆ
 			{
 				this->ChangeValue(this->GetValue().substr(0,this->EnterArgs-2));
 				this->EnterArgs = 0;
 				this->SetSelection(0,-1);
 			}
-			else if (this->GetValue().size())//ÓÐÊäÈëµÄÄÚÈÝ£¬°´EscÇå³ýÄÚÈÝ
+			else if (this->GetValue().size())//æœ‰è¾“å…¥çš„å†…å®¹ï¼ŒæŒ‰Escæ¸…é™¤å†…å®¹
 			{
 				this->EnterArgs = 0;
 				this->Clear();
 			}
-			else//Ã»ÓÐÊäÈë£¬°´EscÒþ²Ø
+			else//æ²¡æœ‰è¾“å…¥ï¼ŒæŒ‰Escéšè—
 				::wxGetApp().GetFrame().Hide();
 			break;
 		case WXK_HOME:
@@ -261,7 +261,7 @@ void MerryTextCtrl::OnKeyDownEvent(wxKeyEvent& e)
 			}
 			else
 			{
-				if (SelectedCMD->GetFlags() == CMDS_FLAG_PLUGIN && this->EnterArgs == 0)//²å¼þÃüÁî
+				if (SelectedCMD->GetFlags() == CMDS_FLAG_PLUGIN && this->EnterArgs == 0)//æ’ä»¶å‘½ä»¤
 				{
 					SetPluginMode(SelectedCMD);
 					break;
@@ -289,7 +289,7 @@ void MerryTextCtrl::OnKeyDownEvent(wxKeyEvent& e)
 					this->SetInsertionPoint(-1);
 				else if (this->GetInsertionPoint()==this->EnterArgs)
 				{
-					if (keyCode == WXK_LEFT || keyCode == WXK_BACK)//ÉèÖÃ¹â±êÔÚÃüÁîÖ®ºó
+					if (keyCode == WXK_LEFT || keyCode == WXK_BACK)//è®¾ç½®å…‰æ ‡åœ¨å‘½ä»¤ä¹‹åŽ
 						break;
 				}
 			}
@@ -334,7 +334,7 @@ void MerryTextCtrl::ExecuteCmd()
 		return;
 	const MerryCommand* command = listBoxPanel->GetSelectionCommand();
 	if (command->GetCmd().empty())
-	{//ÃüÁîÎª¿Õ,²å¼þÃüÁî
+	{//å‘½ä»¤ä¸ºç©º,æ’ä»¶å‘½ä»¤
 		SetPluginMode(command);
 		return;
 	}
@@ -360,7 +360,7 @@ void MerryTextCtrl::AutoCompletion(int keyCode)
 	this->GetSelection(&from, &to);
 	wxString name = this->GetValue();
 
-	if (name.empty())//ÊäÈë¿òÄÚÈÝÎª¿ÕÊ±Òª»Ö¸´µ±Ç°×´Ì¬
+	if (name.empty())//è¾“å…¥æ¡†å†…å®¹ä¸ºç©ºæ—¶è¦æ¢å¤å½“å‰çŠ¶æ€
 		this->EnterArgs = 0;
 
 	if (from != to)
@@ -377,7 +377,7 @@ void MerryTextCtrl::AutoCompletion(int keyCode)
 		{
 			commands = g_commands->Collect(name);
 #ifdef _ALMRUN_CONFIG_H_
-			//Êý×ÖÈÈ¼üÆôÓÃ
+			//æ•°å­—çƒ­é”®å¯ç”¨
 			if (g_config->get(NumberKey) && commands.size() == 0 && (keyCode == ' ' || (keyCode >= '0' && keyCode <= '9')))
 			{
 				if (keyCode == ' ' || listBoxPanel->SetSelection(-1,(keyCode & 0xf)))

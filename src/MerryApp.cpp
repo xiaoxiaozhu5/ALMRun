@@ -7,7 +7,7 @@ bool MerryApp::OnInit()
 {
 	const wxString name = wxString::Format("ALMRun-%s", wxGetUserId().c_str());
     m_checker = new wxSingleInstanceChecker(name);
-    if (m_checker->IsAnotherRunning())//�����Ѿ���������..
+    if (m_checker->IsAnotherRunning())//程序已经在运行中..
     {
         stClient* client = new stClient;
 
@@ -23,7 +23,7 @@ bool MerryApp::OnInit()
         }
         else
         {
-            wxMessageBox(wxT("�����Ѿ�����,���ǽ���ͨ��ʧ��!"),
+            wxMessageBox(wxT("程序已经运行,但是进程通信失败!"),
                 wxT("ALMRun"), wxICON_INFORMATION|wxOK);
         }
 		wxDELETE(client);
@@ -34,7 +34,7 @@ bool MerryApp::OnInit()
     m_server = new stServer;
     if (!m_server->Create(IPC_SERVICE))
     {
-        wxMessageBox("�����߼�����ͨ��ʧ��,�޷�ʵ�ֵ�һʵ�����̺��Ҽ����͵��ȹ���.");
+        wxMessageBox("创建高级进程通信失败,无法实现单一实例进程和右键发送到等功能.");
 		return false;
     }
 	if (!wxApp::OnInit())
@@ -93,7 +93,7 @@ int MerryApp::OnExit()
 {
 	__DEBUG_BEGIN("")
 	this->Disconnect(wxEVT_ACTIVATE_APP);
-	//�Ӵ��ڻ��Զ���գ����Բ���Ҫ�����䣬�����п��ܻ����
+	//子窗口会自动半闭，所以不需要这个语句，否则有可能会出错
 	//if (m_frame)
 	//	wxDELETE(m_frame);
 	m_frame = NULL;

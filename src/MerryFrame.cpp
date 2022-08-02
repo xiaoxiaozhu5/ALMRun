@@ -78,7 +78,7 @@ void MerryFrame::setTitle(const wxString& title)
 
 void MerryFrame::NewConfig()
 {
-	__DEBUG_BEGIN("::Ë¢ÐÂÅäÖÃ");
+	__DEBUG_BEGIN("::åˆ·æ–°é…ç½®");
 	bool show = m_listBoxPanel->IsShown();
 	m_listBoxPanel->Dismiss();
 	LastCmd = NULL;
@@ -112,7 +112,7 @@ void MerryFrame::NewConfig()
 		m_listBoxPanel->SetToolTip(NULL);
 #endif//#ifdef _ALMRUN_CONFIG_H_
 	g_lua->DoConfig();
-	__DEBUG_END("::Ë¢ÐÂÅäÖÃ");
+	__DEBUG_END("::åˆ·æ–°é…ç½®");
 }
 
 void MerryFrame::OnInit()
@@ -217,7 +217,7 @@ void MerryFrame::OnShowEvent(wxShowEvent& e)
 	assert(textCtrl);
 	if (e.IsShown())
 	{
-		if (g_config->get(PlayPopupNotify))//ÊÇ·ñ²¥·ÅÌáÊ¾Òô
+		if (g_config->get(PlayPopupNotify))//æ˜¯å¦æ’­æ”¾æç¤ºéŸ³
 			wxSound("Popup.wav").Play();
 		textCtrl->ChangeValue(wxT(""));
 		this->CentreOnce();

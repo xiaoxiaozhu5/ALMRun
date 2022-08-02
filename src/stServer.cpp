@@ -51,9 +51,9 @@ bool stConnection::OnExecute(const wxString& topic,
 {
 	__DEBUG_BEGIN("")
 	wxString cmd((const wchar_t *)data);
-	if (topic == IPC_TOPIC)//程序通信
+	if (topic == IPC_TOPIC)//绋嬪簭閫氫俊
 	{
-		if (cmd.empty() ||  cmd.Upper() == "SHOW")//默认显示
+		if (cmd.empty() ||  cmd.Upper() == "SHOW")//榛樿鏄剧ず
 		{
 			::wxGetApp().GetFrame().Show();
 			return true;
@@ -100,7 +100,7 @@ bool stConnection::OnDisconnect()
 			else if (g_config->AddCmd(cmd,wxFileNameFromPath(cmd)) <= 0)
 				ShowErrinfo(ShowCMDErrInfo);;
 		}
-		wxMessageBox("批量添加完成!");
+		wxMessageBox("鎵归噺娣诲姞瀹屾垚!");
 	}
 	::wxGetApp().stServerDisconnect();
     return true;

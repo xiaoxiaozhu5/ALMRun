@@ -4,14 +4,14 @@
 #include "MerryWx.h"
 #include <wx/textcompleter.h>
 /*
-Ϊ��ʵ������λ��ƥ��,��Ҫ�޸�wxWidgetԴ��
+为了实现任意位置匹配,需要修改wxWidget源码
 src\msw\textentry.cpp
-���� pAutoComplete2->SetOptions
-���� ACO_NOPREFIXFILTERING ʵ������λ��ƥ��
+查找 pAutoComplete2->SetOptions
+添加 ACO_NOPREFIXFILTERING 实现任意位置匹配
 
-��һ���Ķ�����ͬһ���ļ���
-���� wxBIND_OR_CONNECT_HACK(m_win, wxEVT_AFTER_CHAR,
-�޸�Ϊ wxBIND_OR_CONNECT_HACK(m_win, wxEVT_CHAR,
+另一个改动上面同一个文件中
+查找 wxBIND_OR_CONNECT_HACK(m_win, wxEVT_AFTER_CHAR,
+修改为 wxBIND_OR_CONNECT_HACK(m_win, wxEVT_CHAR,
 */
 class MyTextCompleter : public wxTextCompleter
 {

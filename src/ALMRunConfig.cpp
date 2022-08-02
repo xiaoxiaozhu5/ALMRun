@@ -10,34 +10,34 @@
 ALMRunConfig* g_config = NULL;
 const char *ALMRunConfig::config_str[] = {"AutoRun","StayOnTop","NumberKey","ShowTrayIcon","ShowTopTen","ShowCommandLine","ExecuteIfOnlyOne","RememberFavouratMatch","MatchAnywhere","IndexFrom0to9","OrderByPre","ShowTip","DisableWow64FsRedirection","AddToSendTo","PlayPopupNotify","SpaceKey","AutoPopup","DoubleToggleFunc","DoubleClick","DuplicateCMD","cmdSingleProecss","cmdReadShortcut","SaveWinPos","ShowCMDErrInfo"};
 const char *ALMRunConfig::config_tip[] = {
-	"Èç¹ûÑ¡ÖĞ£¬ËæÏµÍ³Æô¶¯¶ø×Ô¶¯ÔËĞĞ(Ìí¼ÓÒ»¸ö¿ì½İ·½Ê½µ½Æô¶¯²Ëµ¥),¿ì½İ¼ü Ctrl+Shift+R,²¿·İÏµÍ³ÏÂÒ²¿ÉÒÔÖ±½Ó°´Õâ¸ö¿ì½İ¼ü¿ìËÙÆô¶¯",
-	"±£³Ö³ÌĞò´°¿ÚÖÃ¶¥,Ä¬ÈÏ½ûÓÃ.",
-	"Ñ¡ÖĞÊ±ÇÃ0-9¼üÖ´ĞĞ¶ÔÓ¦±àºÅµÄ¿ì½İÏî",
-	"Ñ¡ÖĞÊ±ÔÚÏµÍ³ÍĞÅÌÏÔÊ¾Í¼±ê",
-	"Ñ¡ÖĞÊ±½öÏÔÊ¾Ç°10Ïî¿ì½İÏî",
-	"Èç¹ûÑ¡ÖĞ£¬ÔÚµ×²¿ÏÔÊ¾ÃüÁîĞĞ",
-	"Ñ¡ÖĞÊ±ÁĞ±íÖ»Ê£Ò»ÏîÊ±ÎŞĞè°´¼üÁ¢¼´Ö´ĞĞ",
-	"Èç¹ûÑ¡ÖĞ£¬¼Ç×¡×î½üÒ»´Î¹Ø¼ü×ÖºÍ¿ì½İÏîµÄ¶ÔÓ¦¹ØÏµ",
-	"Èç¹ûÎ´Ñ¡ÖĞ£¬´ÓµÚÒ»¸ö×ÖÄ¸Æ¥Åä¹Ø¼ü×Ö\n×¢:ÉèÖÃ¸ÃÏî»á×Ô¶¯ĞŞ¸ÄCompareModeµÄÖµ.(Èç¹ûÓĞÍ¨¹ıLUA½Å±¾¶¯Ì¬ÅäÖÃÔòÒÔLUAµÄÅäÖÃÎª×¼)",
-	"Èç¹ûÎ´Ñ¡ÖĞ£¬±àºÅË³ĞòÎª 1, 2, ..., 9, 0",
-	"Èç¹ûÑ¡ÖĞ, ÃüÁîÁĞ±íÖĞÇ°ê¡Æ¥ÅäµÄÅÅÇ°Ãæ",
-	"Èç¹ûÑ¡ÖĞ,Êó±êÒÆ¶¯ÁĞ±í¿òÏîÄ¿Ê±»áÏÔÊ¾±¸×¢ĞÅÏ¢»òÃüÁîĞĞ",
-	"ÔËĞĞ³ÌĞòÖ®Ç°½ûÓÃÏµÍ³µÄWOW64ÖØ¶¨Ïò,½â¾öÔÚ64Î»ÏµÍ³ÉÏ²¿·İ64Î»³ÌĞòÎŞ·¨ÔËĞĞµÄÎÊÌâ",
-	"Èç¹ûÑ¡ÖĞ£¬½«±¾Èí¼şÌí¼Óµ½¡°·¢ËÍµ½¡±²Ëµ¥",
-	"Èç¹ûÑ¡ÖĞ£¬µ±´°Ìåµ¯³öÊ±²¥·ÅÉùÒô",
-	"Èç¹ûÑ¡ÖĞ£¬°´ÏÂ¿Õ¸ñ¼ü¾ÍÆô¶¯µ±Ç°ÌõÄ¿",
-	"Èç¹ûÑ¡ÖĞ£¬ÏÔÊ¾ALMRun½çÃæÊ±×Ô¶¯ÏÔÊ¾ÁĞ±í¿ò",
-	"Èç¹ûÑ¡ÖĞ£¬Á¬Ğø°´Á½´Î³ÌĞòÈÈ¼üÏàµ±ÓÚALT+L¹¦ÄÜ£¬ÖØ¸´Ö´ĞĞÉÏÒ»´ÎµÄÃüÁî\n×¢:Á½´Î¼ä¸ô²»³¬¹ı300ºÁÃë²ÅÓĞĞ§",
-	"Èç¹ûÑ¡ÖĞ£¬Êó±êµ¥»÷Ñ¡ÖĞÁĞ±íÌõÄ¿£¬Ë«»÷ÔËĞĞ\n·ñÔòÊó±êÒÆ¶¯×Ô¶¯Ñ¡ÖĞ,µ¥»÷ÔËĞĞ",
-	"Èç¹ûÑ¡ÖĞ£¬ÔÊĞíÃüÁîÃû³ÆÒ»Ñù£¬·ñÔòÌí¼ÓÃüÁîÊ±Ãû³ÆÒ»Ñù»áÊ§°Ü¡£",
-	"Èç¹ûÑ¡ÖĞ, Í¬Ò»¸öÃüÁîÖ»ÔÊĞíÔËĞĞÒ»¸ö,¸ù¾İ½ø³ÌPIDÀ´È·¶¨(È«¾Ö).",
-	"Èç¹ûÑ¡ÖĞ, Ìí¼Ó¿ì½İ·½Ê½ÎÄ¼ş(.lnk)×÷ÎªÃüÁîÊ±×Ô¶¯¶ÁÈ¡¸Ã¿ì½İ·½Ê½µÄÊôĞÔ.",
-	"Èç¹ûÑ¡ÖĞ, ±£´æµ±Ç°µÄ´°¿ÚÎ»ÖÃ,ÏÂ´ÎÆô¶¯»¹ÊÇÊ¹ÓÃÍ¬Ò»Î»ÖÃ¶ø²»ÊÇ×Ô¶¯¾ÓÖĞ",
+	"å¦‚æœé€‰ä¸­ï¼Œéšç³»ç»Ÿå¯åŠ¨è€Œè‡ªåŠ¨è¿è¡Œ(æ·»åŠ ä¸€ä¸ªå¿«æ·æ–¹å¼åˆ°å¯åŠ¨èœå•),å¿«æ·é”® Ctrl+Shift+R,éƒ¨ä»½ç³»ç»Ÿä¸‹ä¹Ÿå¯ä»¥ç›´æ¥æŒ‰è¿™ä¸ªå¿«æ·é”®å¿«é€Ÿå¯åŠ¨",
+	"ä¿æŒç¨‹åºçª—å£ç½®é¡¶,é»˜è®¤ç¦ç”¨.",
+	"é€‰ä¸­æ—¶æ•²0-9é”®æ‰§è¡Œå¯¹åº”ç¼–å·çš„å¿«æ·é¡¹",
+	"é€‰ä¸­æ—¶åœ¨ç³»ç»Ÿæ‰˜ç›˜æ˜¾ç¤ºå›¾æ ‡",
+	"é€‰ä¸­æ—¶ä»…æ˜¾ç¤ºå‰10é¡¹å¿«æ·é¡¹",
+	"å¦‚æœé€‰ä¸­ï¼Œåœ¨åº•éƒ¨æ˜¾ç¤ºå‘½ä»¤è¡Œ",
+	"é€‰ä¸­æ—¶åˆ—è¡¨åªå‰©ä¸€é¡¹æ—¶æ— éœ€æŒ‰é”®ç«‹å³æ‰§è¡Œ",
+	"å¦‚æœé€‰ä¸­ï¼Œè®°ä½æœ€è¿‘ä¸€æ¬¡å…³é”®å­—å’Œå¿«æ·é¡¹çš„å¯¹åº”å…³ç³»",
+	"å¦‚æœæœªé€‰ä¸­ï¼Œä»ç¬¬ä¸€ä¸ªå­—æ¯åŒ¹é…å…³é”®å­—\næ³¨:è®¾ç½®è¯¥é¡¹ä¼šè‡ªåŠ¨ä¿®æ”¹CompareModeçš„å€¼.(å¦‚æœæœ‰é€šè¿‡LUAè„šæœ¬åŠ¨æ€é…ç½®åˆ™ä»¥LUAçš„é…ç½®ä¸ºå‡†)",
+	"å¦‚æœæœªé€‰ä¸­ï¼Œç¼–å·é¡ºåºä¸º 1, 2, ..., 9, 0",
+	"å¦‚æœé€‰ä¸­, å‘½ä»¤åˆ—è¡¨ä¸­å‰è¾åŒ¹é…çš„æ’å‰é¢",
+	"å¦‚æœé€‰ä¸­,é¼ æ ‡ç§»åŠ¨åˆ—è¡¨æ¡†é¡¹ç›®æ—¶ä¼šæ˜¾ç¤ºå¤‡æ³¨ä¿¡æ¯æˆ–å‘½ä»¤è¡Œ",
+	"è¿è¡Œç¨‹åºä¹‹å‰ç¦ç”¨ç³»ç»Ÿçš„WOW64é‡å®šå‘,è§£å†³åœ¨64ä½ç³»ç»Ÿä¸Šéƒ¨ä»½64ä½ç¨‹åºæ— æ³•è¿è¡Œçš„é—®é¢˜",
+	"å¦‚æœé€‰ä¸­ï¼Œå°†æœ¬è½¯ä»¶æ·»åŠ åˆ°â€œå‘é€åˆ°â€èœå•",
+	"å¦‚æœé€‰ä¸­ï¼Œå½“çª—ä½“å¼¹å‡ºæ—¶æ’­æ”¾å£°éŸ³",
+	"å¦‚æœé€‰ä¸­ï¼ŒæŒ‰ä¸‹ç©ºæ ¼é”®å°±å¯åŠ¨å½“å‰æ¡ç›®",
+	"å¦‚æœé€‰ä¸­ï¼Œæ˜¾ç¤ºALMRunç•Œé¢æ—¶è‡ªåŠ¨æ˜¾ç¤ºåˆ—è¡¨æ¡†",
+	"å¦‚æœé€‰ä¸­ï¼Œè¿ç»­æŒ‰ä¸¤æ¬¡ç¨‹åºçƒ­é”®ç›¸å½“äºALT+LåŠŸèƒ½ï¼Œé‡å¤æ‰§è¡Œä¸Šä¸€æ¬¡çš„å‘½ä»¤\næ³¨:ä¸¤æ¬¡é—´éš”ä¸è¶…è¿‡300æ¯«ç§’æ‰æœ‰æ•ˆ",
+	"å¦‚æœé€‰ä¸­ï¼Œé¼ æ ‡å•å‡»é€‰ä¸­åˆ—è¡¨æ¡ç›®ï¼ŒåŒå‡»è¿è¡Œ\nå¦åˆ™é¼ æ ‡ç§»åŠ¨è‡ªåŠ¨é€‰ä¸­,å•å‡»è¿è¡Œ",
+	"å¦‚æœé€‰ä¸­ï¼Œå…è®¸å‘½ä»¤åç§°ä¸€æ ·ï¼Œå¦åˆ™æ·»åŠ å‘½ä»¤æ—¶åç§°ä¸€æ ·ä¼šå¤±è´¥ã€‚",
+	"å¦‚æœé€‰ä¸­, åŒä¸€ä¸ªå‘½ä»¤åªå…è®¸è¿è¡Œä¸€ä¸ª,æ ¹æ®è¿›ç¨‹PIDæ¥ç¡®å®š(å…¨å±€).",
+	"å¦‚æœé€‰ä¸­, æ·»åŠ å¿«æ·æ–¹å¼æ–‡ä»¶(.lnk)ä½œä¸ºå‘½ä»¤æ—¶è‡ªåŠ¨è¯»å–è¯¥å¿«æ·æ–¹å¼çš„å±æ€§.",
+	"å¦‚æœé€‰ä¸­, ä¿å­˜å½“å‰çš„çª—å£ä½ç½®,ä¸‹æ¬¡å¯åŠ¨è¿˜æ˜¯ä½¿ç”¨åŒä¸€ä½ç½®è€Œä¸æ˜¯è‡ªåŠ¨å±…ä¸­",
 };
 
 ALMRunConfig::ALMRunConfig()
 {
-	//³õÊ¼»¯Ä¬ÈÏ²ÎÊı
+	//åˆå§‹åŒ–é»˜è®¤å‚æ•°
 	config[OrderByPre] = false;
 	config[NumberKey] = false;
 	config[ExecuteIfOnlyOne] = false;
@@ -86,25 +86,25 @@ ALMRunConfig::ALMRunConfig()
 	conf->SetExpandEnvVars(false);
 	conf->SetRecordDefaults(false);
 	config_u[CONFIG_VER] = conf->ReadLong("Version",-1);
-	if (config_u[CONFIG_VER] != CONFIG_VERSION)//ÅäÖÃÎÄ¼ş°æ±¾²»Ò»ÖÂ
+	if (config_u[CONFIG_VER] != CONFIG_VERSION)//é…ç½®æ–‡ä»¶ç‰ˆæœ¬ä¸ä¸€è‡´
 	{
-		if (wxMessageBox(wxT("ÎªÁË·½±ãÊ¹ÓÃ£¬ĞÂµÄ°æ±¾¶ÔÅäÖÃÎÄ¼ş½øĞĞÁËÒ»Ğ©¸Ä±ä£¬ĞèÒªÉı¼¶ÅäÖÃÎÄ¼ş²Å¿ÉÒÔÕı³£Ê¹ÓÃ,¶Ô´ËÔì³ÉµÄ²»±ãÇëÁÂ½â\n\n\t\tÊÇ·ñÏÖÔÚÉı¼¶£¿"),wxT("ÌáÊ¾"),wxICON_INFORMATION|wxYES_NO) == wxYES)
+		if (wxMessageBox(wxT("ä¸ºäº†æ–¹ä¾¿ä½¿ç”¨ï¼Œæ–°çš„ç‰ˆæœ¬å¯¹é…ç½®æ–‡ä»¶è¿›è¡Œäº†ä¸€äº›æ”¹å˜ï¼Œéœ€è¦å‡çº§é…ç½®æ–‡ä»¶æ‰å¯ä»¥æ­£å¸¸ä½¿ç”¨,å¯¹æ­¤é€ æˆçš„ä¸ä¾¿è¯·è°…è§£\n\n\t\tæ˜¯å¦ç°åœ¨å‡çº§ï¼Ÿ"),wxT("æç¤º"),wxICON_INFORMATION|wxYES_NO) == wxYES)
 		{
 			if (wxCopyFile(cfg_file,cfg_file + ".V1.BAK"))
 			{
 				configv2();
-				wxMessageBox(wxT("Éı¼¶Íê³É£¨¾É°æÅäÖÃÎÄ¼şÒÑ¾­±¸·İÎªALMRun.V1.BAK£©£¬²¿·İÃüÁî¿ÉÄÜ»á³ö´í£¬½¨ÒéÊ¹ÓÃ¹ÜÀíÆ÷¼ì²éÒ»ÏÂ"));
+				wxMessageBox(wxT("å‡çº§å®Œæˆï¼ˆæ—§ç‰ˆé…ç½®æ–‡ä»¶å·²ç»å¤‡ä»½ä¸ºALMRun.V1.BAKï¼‰ï¼Œéƒ¨ä»½å‘½ä»¤å¯èƒ½ä¼šå‡ºé”™ï¼Œå»ºè®®ä½¿ç”¨ç®¡ç†å™¨æ£€æŸ¥ä¸€ä¸‹"));
 				cfg_changed = conf->Write("Version",(config_u[CONFIG_VER] = CONFIG_VERSION));
 			}
 			else
 			{
-				wxMessageBox(wxT("±¸·İ¾É°æÅäÖÃÎÄ¼şÊ§°Ü£¬Éı¼¶Ê§°Ü£¬¿ÉÄÜÎŞ·¨Õı³£Ê¹ÓÃ"));
+				wxMessageBox(wxT("å¤‡ä»½æ—§ç‰ˆé…ç½®æ–‡ä»¶å¤±è´¥ï¼Œå‡çº§å¤±è´¥ï¼Œå¯èƒ½æ— æ³•æ­£å¸¸ä½¿ç”¨"));
 			}
 		}
 	}
 	config_u[ParamHistoryLimit] = conf->ReadLong("ParamHistoryLimit",ParamHistoryLimit_default);
 
-	//´ÓÅäÖÃÎÄ¼şÖĞ¶ÁÈ¡²ÎÊı£¬Èç¹û²»´æÔÚÔòÊ¹ÓÃÄ¬ÈÏÖµ
+	//ä»é…ç½®æ–‡ä»¶ä¸­è¯»å–å‚æ•°ï¼Œå¦‚æœä¸å­˜åœ¨åˆ™ä½¿ç”¨é»˜è®¤å€¼
 	for(int i=0;i<CONFIG_BOOL_MAX;++i)
 		config[i] = conf->ReadBool(config_str[i],config[i]);
 
@@ -114,18 +114,18 @@ ALMRunConfig::ALMRunConfig()
 	this->set("StayOnTop",config[StayOnTop]);
 	g_config = this;
 
-	//³ÌĞòÏÔÒşÈÈ¼üÅäÖÃ
+	//ç¨‹åºæ˜¾éšçƒ­é”®é…ç½®
 	HotKey = conf->Read("HotKey","A-R");
 	if (!g_hotkey->RegisterHotkey(g_commands->AddCommand(wxEmptyString,wxEmptyString,"toggleMerry",wxEmptyString,g_lua->get_funcref(LUA_toggleMerry),HotKey,0)))
 	{
 		this->set("ShowTrayIcon",true);
-		wxMessageBox(wxString::Format("ÈÈ¼ü %s ×¢²áÊ§°Ü!",HotKey),"´íÎóÌáÊ¾",0x00000100);
+		wxMessageBox(wxString::Format("çƒ­é”® %s æ³¨å†Œå¤±è´¥!",HotKey),"é”™è¯¯æç¤º",0x00000100);
 	}
-	//ÖØÔØÅäÖÃÈÈ¼üÅäÖÃ
+	//é‡è½½é…ç½®çƒ­é”®é…ç½®
 	HotKeyReLoad = conf->Read("HotKeyReLoad");
 	if (!HotKeyReLoad.empty())
 		g_hotkey->RegisterHotkey(g_commands->AddCommand(wxEmptyString,wxEmptyString,"ReConfig",wxEmptyString,g_lua->get_funcref(LUA_ReConfig),HotKeyReLoad,0));
-	//ÉÏÒ»¸öÔËĞĞµÄÃüÁîÈÈ¼üÅäÖÃ
+	//ä¸Šä¸€ä¸ªè¿è¡Œçš„å‘½ä»¤çƒ­é”®é…ç½®
 	LastItemHotKey = conf->Read("LastItemHotKey");
 	if (!LastItemHotKey.empty())
 		g_hotkey->RegisterHotkey(g_commands->AddCommand(wxEmptyString,wxEmptyString,"LastCmd",wxEmptyString,LUA_NOREF,LastItemHotKey,0));
@@ -147,8 +147,8 @@ ALMRunConfig::ALMRunConfig()
 	{
 		if (InSendTo == false)
 		{
-			if (!CreateFileShortcut(::wxGetApp().argv[0],Sendto.c_str(),Home,0,_T("ALMRun ¿ìËÙÆô¶¯¹¤¾ß")))
-				wxMessageBox("Ìí¼Óµ½<·¢ËÍµ½>²Ëµ¥Ê§°Ü!");
+			if (!CreateFileShortcut(::wxGetApp().argv[0],Sendto.c_str(),Home,0,_T("ALMRun å¿«é€Ÿå¯åŠ¨å·¥å…·")))
+				wxMessageBox("æ·»åŠ åˆ°<å‘é€åˆ°>èœå•å¤±è´¥!");
 		}
 		
 	}
@@ -161,8 +161,8 @@ ALMRunConfig::ALMRunConfig()
 	{
 		if (InStartup == false)
 		{
-			if (!CreateFileShortcut(::wxGetApp().argv[0],Startup.c_str(),Home,MAKEWORD('R',HOTKEYF_ALT | HOTKEYF_CONTROL),_T("ALMRun ¿ìËÙÆô¶¯¹¤¾ß")))
-				wxMessageBox("Ìí¼Ó×Ô¶¯Æô¶¯µ½<¿ªÊ¼/Æô¶¯>Ê§°Ü!");
+			if (!CreateFileShortcut(::wxGetApp().argv[0],Startup.c_str(),Home,MAKEWORD('R',HOTKEYF_ALT | HOTKEYF_CONTROL),_T("ALMRun å¿«é€Ÿå¯åŠ¨å·¥å…·")))
+				wxMessageBox("æ·»åŠ è‡ªåŠ¨å¯åŠ¨åˆ°<å¼€å§‹/å¯åŠ¨>å¤±è´¥!");
 		}
 
 	}
@@ -259,7 +259,7 @@ void ALMRunConfig::GuiConfig()
 
 		conf->Flush();
 		#ifdef __WXMSW__
-			//Ê¹ÓÃPOST·¢ËÍÏûÏ¢£¬Ê¹µÃÕâ¸öº¯Êı¿ÉÒÔ¿ìËÙ·µ»Ø.
+			//ä½¿ç”¨POSTå‘é€æ¶ˆæ¯ï¼Œä½¿å¾—è¿™ä¸ªå‡½æ•°å¯ä»¥å¿«é€Ÿè¿”å›.
 			PostMessage(::wxGetApp().GetFrame().GetHWND(),WM_COMMAND,MENU_ITEM_RECONFIG,0);
 		#else
 			::wxGetApp().GetFrame().NewConfig();
@@ -326,13 +326,13 @@ int ALMRunConfig::AddCmd(const wxString& cmd,const wxString& name,const wxString
 
 	if (cmdId < 0)
 	{
-		MerrySetLastError(wxString::Format("Ìí¼ÓÃüÁîÊ§°Ü\nÃüÁî%s\n%s",name,MerryGetLastError()));
+		MerrySetLastError(wxString::Format("æ·»åŠ å‘½ä»¤å¤±è´¥\nå‘½ä»¤%s\n%s",name,MerryGetLastError()));
 		return -1;
 	}
 
 	if (!key.empty() && !g_hotkey->RegisterHotkey(cmdId))
 	{
-		MerrySetLastError(wxString::Format("×¢²áÈÈ¼üÊ§°Ü:%s\n,ÃüÁî[%d]:%s\n%s",key,Id,name,MerryGetLastError()));
+		MerrySetLastError(wxString::Format("æ³¨å†Œçƒ­é”®å¤±è´¥:%s\n,å‘½ä»¤[%d]:%s\n%s",key,Id,name,MerryGetLastError()));
 		return -1;
 	}
 
@@ -448,7 +448,7 @@ bool ALMRunConfig::set(size_t item,bool value)
 	if (item < 0 || item >= CONFIG_BOOL_MAX)
 		return false;
 
-	if (this->config[item] == value)//Ã»ÓĞ±ä»¯,²»ĞèÒª¸ü¸Ä
+	if (this->config[item] == value)//æ²¡æœ‰å˜åŒ–,ä¸éœ€è¦æ›´æ”¹
 		return true;
 
 	if (conf)
@@ -479,7 +479,7 @@ bool ALMRunConfig::Changed()
 	return (cfg_time  && cfg_time != wxFileModificationTime(cfg_file));
 }
 
-//ĞÂ°æµÄÅäÖÃÎÄ¼ş?
+//æ–°ç‰ˆçš„é…ç½®æ–‡ä»¶?
 void ALMRunConfig::ConfigCommand()
 {
 	if (!conf)
@@ -493,7 +493,7 @@ void ALMRunConfig::ConfigCommand()
 	long cmdId;
 	long index = 0;
 	bool isExpandEnv = conf->IsExpandingEnvVars();
-	//ÃüÁî
+	//å‘½ä»¤
 	conf->SetExpandEnvVars(true);
 	conf->SetPath("/cmds");
 	for(bool test = conf->GetFirstGroup(cmds,index); test ; conf->SetPath("../"),test = conf->GetNextGroup(cmds,index))
@@ -516,9 +516,9 @@ void ALMRunConfig::ConfigCommand()
 		if (this->AddCmd(cmd,name,key,desc,workdir,cmdId) <= 0)
 			ShowErrinfo(ShowCMDErrInfo);
     }
-	//×Ô¶¯É¨ÃèÄ¿Â¼ÅäÖÃ
+	//è‡ªåŠ¨æ‰«æç›®å½•é…ç½®
 	conf->SetPath("/dirs");
-	//¶ÁÈ¡Ä¬ÈÏ²ÎÊı
+	//è¯»å–é»˜è®¤å‚æ•°
 	def_dir_cfg.sub = conf->ReadLong("sub",0);
 	def_dir_cfg.include = conf->Read("include");
 	def_dir_cfg.exclude = conf->Read("exclude");
@@ -538,7 +538,7 @@ void ALMRunConfig::ConfigCommand()
 	conf->SetPath("/Config");
 	conf->SetExpandEnvVars(isExpandEnv);
 }
-//V1°æÅäÖÃ×ª»»ÎªV2°æ
+//V1ç‰ˆé…ç½®è½¬æ¢ä¸ºV2ç‰ˆ
 void ALMRunConfig::configv2()
 {
 	if (!conf)
@@ -586,7 +586,7 @@ void ALMRunConfig::configv2()
 	return;
 }
 
-//¾É°æ×Ô¶¯×ª»»ÎªĞÂ°æ±¾
+//æ—§ç‰ˆè‡ªåŠ¨è½¬æ¢ä¸ºæ–°ç‰ˆæœ¬
 void ALMRunConfig::OldToNew()
 {
 	size_t sizes;

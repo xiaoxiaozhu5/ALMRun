@@ -51,7 +51,7 @@ void MerryCommand::conf_cmd()
 	PID = 0;
 	wxString luaCmd;
 	BOOL x64 = IsX64();
-	if (g_lua && m_commandLine.StartsWith("--LUA",&luaCmd))//ÊÇLUA½Å±¾ÃüÁî,ÐèÒª×ª»»
+	if (g_lua && m_commandLine.StartsWith("--LUA",&luaCmd))//æ˜¯LUAè„šæœ¬å‘½ä»¤,éœ€è¦è½¬æ¢
 	{
 
 		lua_State* L = g_lua->GetLua();
@@ -60,7 +60,7 @@ void MerryCommand::conf_cmd()
 		luaCmd.insert(0,"return function(args,cmdID)\n").append("\nend");
 
 		if (!luaL_dostring(L,luaCmd) && lua_isfunction(L,-1))
-		{//Ö´ÐÐÕý³£·µ»ØÒ»¸öº¯Êý
+		{//æ‰§è¡Œæ­£å¸¸è¿”å›žä¸€ä¸ªå‡½æ•°
 			m_commandFunc = luaL_ref(L, LUA_REGISTRYINDEX);
 		}
 		else
@@ -118,7 +118,7 @@ void MerryCommand::conf_cmd()
 
 	m_commandFName.sprintf("%s\n%s",m_commandName,GetPinYin(m_commandName));
 	#ifdef _ALMRUN_CONFIG_H_
-	//»ñÈ¡ÅÅÐòÖµÐÅÏ¢
+	//èŽ·å–æŽ’åºå€¼ä¿¡æ¯
 	if (g_config && g_config->order_conf)
 		m_order = g_config->order_conf->ReadLong(m_commandName,0);
 	#endif
@@ -130,30 +130,30 @@ wxString MerryCommand::GetDetails() const
 	int cmdId = m_flags >> 4;
 	if (m_flags == CMDS_FLAG_PLUGIN)
 	{
-		cmd_from = wxT("LUA²å¼þÀ©Õ¹");
+		cmd_from = wxT("LUAæ’ä»¶æ‰©å±•");
 		cmdId = m_commandID;
 	}
 	else if (m_flags & CMDS_FLAG_DIRS)
 	{
-		cmd_from = wxT("Ä¿Â¼É¨Ãè(ALMRUN.INI)");
+		cmd_from = wxT("ç›®å½•æ‰«æ(ALMRUN.INI)");
 	}
 	else if (m_flags & CMDS_FLAG_ALTRUN)
 	{
-		cmd_from = wxT("ALTRunÅäÖÃÎÄ¼þ");
+		cmd_from = wxT("ALTRuné…ç½®æ–‡ä»¶");
 	}
 	else if (m_flags & CMDS_FLAG_LUA)
 	{
-		cmd_from = wxT("LUA½Å±¾À©Õ¹");
+		cmd_from = wxT("LUAè„šæœ¬æ‰©å±•");
 	}
 	else if (m_flags & CMDS_FLAG_CMDS)
 	{
-		cmd_from = wxT("ALMRunÃüÁî(ALMRUN.INI)");
+		cmd_from = wxT("ALMRunå‘½ä»¤(ALMRUN.INI)");
 	}
 	else
 	{
-		cmd_from = wxT("Î´ÖªÅäÖÃ");
+		cmd_from = wxT("æœªçŸ¥é…ç½®");
 	}
-	return wxString::Format(wxT("ÅäÖÃÎÄ¼þ£º%s\nID:[%d] %s\nÃüÁî:%s\nÈÈ¼ü: %s\n"),cmd_from,cmdId,this->m_commandDesc,this->m_commandLine,this->m_triggerKey);
+	return wxString::Format(wxT("é…ç½®æ–‡ä»¶ï¼š%s\nID:[%d] %s\nå‘½ä»¤:%s\nçƒ­é”®: %s\n"),cmd_from,cmdId,this->m_commandDesc,this->m_commandLine,this->m_triggerKey);
 }
 
 wxString MerryCommand::GetCmd() const
@@ -161,7 +161,7 @@ wxString MerryCommand::GetCmd() const
 	if (!m_commandLine.empty())
 		return m_commandLine;
 	if (m_commandFunc)
-		return wxT("Ö´ÐÐLUAÃüÁî");
+		return wxT("æ‰§è¡ŒLUAå‘½ä»¤");
 	return wxEmptyString;
 }
 
@@ -191,10 +191,10 @@ void MerryCommand::Execute(const wxString& commandArg) const
 	assert(L);
 
 	#ifdef __WXMSW__
-	if (PID > 1)//½ûÖ¹¶à¸ö½ø³Ì
+	if (PID > 1)//ç¦æ­¢å¤šä¸ªè¿›ç¨‹
 	{
 		if (CheckActiveProg(PID))
-		{//ÒÑ¾­ÔËÐÐ,²éÕÒÇ°¼¤»îÖ®Ç°µÄ´°¿Ú
+		{//å·²ç»è¿è¡Œ,æŸ¥æ‰¾å‰æ¿€æ´»ä¹‹å‰çš„çª—å£
 			::wxGetApp().GetFrame().Hide();
 			return;
 		}

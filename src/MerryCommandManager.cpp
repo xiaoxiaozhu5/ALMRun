@@ -46,7 +46,7 @@ const void MerryCommandManager::AddFiles(const wxArrayString& files,const wxArra
 	{
 		int j;
 		for(j = excludes.size()-1;j >= 0;--j)
-		{//¹ıÂË·ûºÏÌõ¼şµÄÄÚÈİ
+		{//è¿‡æ»¤ç¬¦åˆæ¡ä»¶çš„å†…å®¹
 			if (files[i].Matches(excludes[j]))
 				break;
 		}
@@ -75,13 +75,13 @@ const int MerryCommandManager::AddCommand(const wxString& commandName,const wxSt
 {
 	if (m_commands.size() >= 10000)
 	{
-		MerrySetLastError(wxT("\n³¬¹ı10000¸öÃüÁîÏŞÖÆ£¬Ä¿Ç°ÏŞÖÆÃüÁîÊıÁ¿²»¿ÉÒÔ³¬¹ı10000¸ö£¬ÓĞÌØÊâĞèÇóÇëÁªÏµÎÒ»òµ½µ½ÍøÕ¾ÁôÑÔ http://chenall.net"));
+		MerrySetLastError(wxT("\nè¶…è¿‡10000ä¸ªå‘½ä»¤é™åˆ¶ï¼Œç›®å‰é™åˆ¶å‘½ä»¤æ•°é‡ä¸å¯ä»¥è¶…è¿‡10000ä¸ªï¼Œæœ‰ç‰¹æ®Šéœ€æ±‚è¯·è”ç³»æˆ‘æˆ–åˆ°åˆ°ç½‘ç«™ç•™è¨€ http://chenall.net"));
 		return -2;
 	}
 
 	if (commandName.empty() && triggerKey.empty())
 	{
-		MerrySetLastError(wxT("\nÈÈ¼ü(KEY)»òÃû³Æ(NAME),ÖÁÉÙĞèÒªÉèÖÃÒ»¸ö"));
+		MerrySetLastError(wxT("\nçƒ­é”®(KEY)æˆ–åç§°(NAME),è‡³å°‘éœ€è¦è®¾ç½®ä¸€ä¸ª"));
 		return -1;
 	}
 	for (size_t i=0; i<m_commands.size(); ++i)
@@ -90,7 +90,7 @@ const int MerryCommandManager::AddCommand(const wxString& commandName,const wxSt
 		assert(command);
 		if (!triggerKey.empty() && triggerKey.IsSameAs(command->GetTriggerKey(), false))
 		{
-			MerrySetLastError(wxString::Format(wxT("\nÃüÁî[%s]ÈÈ¼üÖØ¸´\n\n%s\n"), commandName,command->GetDetails()));
+			MerrySetLastError(wxString::Format(wxT("\nå‘½ä»¤[%s]çƒ­é”®é‡å¤\n\n%s\n"), commandName,command->GetDetails()));
 			return -1;
 		}
 		if (g_config && g_config->get(DuplicateCMD))
@@ -99,7 +99,7 @@ const int MerryCommandManager::AddCommand(const wxString& commandName,const wxSt
 		{
 			if (!(flags & CMDS_FLAG_CMDS) || (command->GetFlags() & CMDS_FLAG_CMDS))
 			{
-				MerrySetLastError(wxString::Format(wxT("\nÃüÁî[%s]ÒÑ¾­´æÔÚ\n\n%s"),commandName,command->GetDetails()));
+				MerrySetLastError(wxString::Format(wxT("\nå‘½ä»¤[%s]å·²ç»å­˜åœ¨\n\n%s"),commandName,command->GetDetails()));
 				return -1;
 			}
 		}
@@ -123,17 +123,17 @@ const MerryCommand* MerryCommandManager::GetCommand(int commandID) const
 }
 
 /*
-	ÃüÁîÅÅĞò
-	1.¸ù¾İÅÅĞòÖµm_order,ÖµÔ½´óÅÅÔÚÔ½Ç°Ãæ.
-	2.Ç°×ºÆ¥ÅäÓÅÏÈ
-	3.ÃüÁîÃûÅÅĞò
+	å‘½ä»¤æ’åº
+	1.æ ¹æ®æ’åºå€¼m_order,å€¼è¶Šå¤§æ’åœ¨è¶Šå‰é¢.
+	2.å‰ç¼€åŒ¹é…ä¼˜å…ˆ
+	3.å‘½ä»¤åæ’åº
 */
 static bool mysort(MerryCommand *s1,MerryCommand  *s2)
 {
 	int cmp  = s1->GetOrder() - s2->GetOrder();
-	if (cmp == 0)//ÅÅĞòÖµÒ»ÑùÊ±
+	if (cmp == 0)//æ’åºå€¼ä¸€æ ·æ—¶
 	{
-		if (s1->m_compare == 0)//Ç°×ºÆ¥ÅäÓÅÏÈ
+		if (s1->m_compare == 0)//å‰ç¼€åŒ¹é…ä¼˜å…ˆ
 		{
 			if (s2->m_compare != 0)
 				return true;
@@ -145,16 +145,16 @@ static bool mysort(MerryCommand *s1,MerryCommand  *s2)
 	return cmp > 0;
 }
 /*
-	ÃüÁîÅÅĞò
-	1.Ç°×ºÆ¥ÅäÓÅÏÈ
-	2.¸ù¾İÅÅĞòÖµm_order,ÖµÔ½´óÅÅÔÚÔ½Ç°Ãæ.
-	3.ÃüÁîÃûÅÅĞò
+	å‘½ä»¤æ’åº
+	1.å‰ç¼€åŒ¹é…ä¼˜å…ˆ
+	2.æ ¹æ®æ’åºå€¼m_order,å€¼è¶Šå¤§æ’åœ¨è¶Šå‰é¢.
+	3.å‘½ä»¤åæ’åº
 */
 static bool SortPreOrder(MerryCommand *s1,MerryCommand  *s2)
 {
-	if (s1->m_compare == 0)//Ç°×ºÆ¥Åä
+	if (s1->m_compare == 0)//å‰ç¼€åŒ¹é…
 	{
-		if (s2->m_compare != 0)//Ç°×º²»Æ¥Åä
+		if (s2->m_compare != 0)//å‰ç¼€ä¸åŒ¹é…
 			return true;
 		int cmp = s1->GetOrder() - s2->GetOrder();
 		if (cmp != 0)
@@ -165,7 +165,7 @@ static bool SortPreOrder(MerryCommand *s1,MerryCommand  *s2)
 	return s2->GetCommandName().Upper() > s1->GetCommandName().Upper();
 }
 
-//³õÊ¼ÅÅĞò
+//åˆå§‹æ’åº
 static bool command_sort(MerryCommand *s1,MerryCommand  *s2)
 {
 	int cmp = s1->GetOrder() - s2->GetOrder();
@@ -214,7 +214,7 @@ void MerryCommandManager::GetPluginCmd(const wxString& name,MerryCommandArray& c
 {
 	if (!g_lua)
 		return;
-	clearCmds(plugin_commands);//ÄÚ´æÇåÀí£¬±ØĞëµÄ
+	clearCmds(plugin_commands);//å†…å­˜æ¸…ç†ï¼Œå¿…é¡»çš„
 	lua_State* L = g_lua->GetLua();
 
 	if (!g_lua->get_func(LUA_PluginCommand_FUNC))
@@ -225,22 +225,22 @@ void MerryCommandManager::GetPluginCmd(const wxString& name,MerryCommandArray& c
 
 	int it=lua_gettop(L);
 
-	lua_pushnil(L);                               // £¿£¿
+	lua_pushnil(L);                               // ï¼Ÿï¼Ÿ
 	ALMRunCMDBase *cmd = NULL;
-    while(lua_next(L, it))                         // ¿ªÊ¼Ã¶¾Ù£¬²¢°ÑÃ¶¾Ùµ½µÄÖµÑ¹ÈëÕ»
+    while(lua_next(L, it))                         // å¼€å§‹æšä¸¾ï¼Œå¹¶æŠŠæšä¸¾åˆ°çš„å€¼å‹å…¥æ ˆ
     {
 		cmd = lua_GetCommand(L, CMDS_FLAG_PLUGIN);
 		if (cmd && !cmd->Name.empty())
 			plugin_commands.push_back(new MerryCommand(plugin_commands.size(),cmd));
 		wxDELETE(cmd);
-        lua_pop(L, 1);                              // ½«Item´ÓÕ»ÀïÃæµ¯³ö
+        lua_pop(L, 1);                              // å°†Itemä»æ ˆé‡Œé¢å¼¹å‡º
     }
 
 	sort(plugin_commands.begin(),plugin_commands.end(),command_sort);
-	//Ìí¼Óµ½ÃüÁîÁĞ±íÖĞ
+	//æ·»åŠ åˆ°å‘½ä»¤åˆ—è¡¨ä¸­
 	for(size_t i=0;i<plugin_commands.size();++i)
 		commands.push_back(plugin_commands[i]);
-	lua_pop://»Ö¸´
+	lua_pop://æ¢å¤
 	lua_pop(L,1);
 	return;
 }
@@ -298,7 +298,7 @@ MerryCommandArray MerryCommandManager::Collect(const wxString& commandPrefix)
 	#endif//ifdef _ALMRUN_CONFIG_H_
 		if (test_cmp)
 		{
-			//FavoriteListÖĞÓĞÆ¥Åä£¬ÏÈ¼ÇÂ¼ÏÂ£¬ºóÃæÔÙ²åÈëµ½×îÇ°Ãæ¡£
+			//FavoriteListä¸­æœ‰åŒ¹é…ï¼Œå…ˆè®°å½•ä¸‹ï¼Œåé¢å†æ’å…¥åˆ°æœ€å‰é¢ã€‚
 			if (!favourite.empty() && !favourite_cmd && command->GetCommandName().IsSameAs(favourite))
 			{
 				favourite_cmd = command;

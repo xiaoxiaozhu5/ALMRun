@@ -28,7 +28,7 @@ MerryInformationDialog::MerryInformationDialog(const wxString& title, const wxSt
 	wxDialog(NULL,wxID_ANY,title)
 {
 	wxBoxSizer* sizerTop = new wxBoxSizer(wxVERTICAL);
-	check_flag = new wxCheckBox(this,wxID_ANY,check.empty()?"不再显示此类提示":check);
+	check_flag = new wxCheckBox(this,wxID_ANY,check.empty()?"涓嶅啀鏄剧ず姝ょ被鎻愮ず":check);
 
 	sizerTop->Add(new wxStaticText(this, wxID_ANY, information), 0, wxEXPAND | wxALL, 25);
 	sizerTop->Add(check_flag,0,wxDOWN | wxRIGHT | wxUP | wxALIGN_RIGHT, 5);

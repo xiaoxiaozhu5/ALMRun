@@ -258,12 +258,12 @@ wxString GetFullCmdName(const wxString& commandName,const wxString& workingDir,c
 	wxFileName fn = wxFileName(cmdName);
 	if (wdir.empty())
 		wdir = ::wxGetCwd();
-	//Èç¹ûÎÄ¼ş´æÔÚ»ò°üº¬Â·¾¶ĞÅÏ¢¾Í²»ÔÙ½øĞĞÆäËü¶îÍâµÄÅĞ¶Ï
+	//å¦‚æœæ–‡ä»¶å­˜åœ¨æˆ–åŒ…å«è·¯å¾„ä¿¡æ¯å°±ä¸å†è¿›è¡Œå…¶å®ƒé¢å¤–çš„åˆ¤æ–­
 	if (fn.Exists() == false)
 	{
 		bool wFound = false;
 		wxString cwd = ::wxGetCwd();
-		wxArrayString mcwd;//¸ù¾İPATHÂ·¾¶²éÑ¯ÎÄ¼ş
+		wxArrayString mcwd;//æ ¹æ®PATHè·¯å¾„æŸ¥è¯¢æ–‡ä»¶
 		wxString NameTmp;
 		wxString wExt = ::wxGetenv("PATHEXT");
 		wExt.UpperCase();
@@ -271,21 +271,21 @@ wxString GetFullCmdName(const wxString& commandName,const wxString& workingDir,c
 			cmdName.Append(".*");
 		if (cmdName.GetChar(0) == '\\')
 			mcwd.Add("\\");
-		else if (cmdName.find('\\') == wxNOT_FOUND)//ÔÚPATHºÍµ±Ç°Ä¿Â¼ÖĞ²éÑ¯
+		else if (cmdName.find('\\') == wxNOT_FOUND)//åœ¨PATHå’Œå½“å‰ç›®å½•ä¸­æŸ¥è¯¢
 			mcwd = ::wxSplit(::wxGetCwd().Append(';').Append(::wxGetenv("PATH")),';','\0');
-		else//Ö»ÔÚµ±Ç°Ä¿Â¼ÖĞ²éÑ¯
+		else//åªåœ¨å½“å‰ç›®å½•ä¸­æŸ¥è¯¢
 			mcwd.Add(::wxGetCwd());
 
 		for(size_t i = 0;i< mcwd.size();++i)
 		{
-			if (!::wxDirExists(mcwd[i]) || !::wxSetWorkingDirectory(mcwd[i]))//Â·¾¶´íÎó»ò²»´æÔÚ²»²éÕÒ
+			if (!::wxDirExists(mcwd[i]) || !::wxSetWorkingDirectory(mcwd[i]))//è·¯å¾„é”™è¯¯æˆ–ä¸å­˜åœ¨ä¸æŸ¥æ‰¾
 				continue;
 			NameTmp =::wxFindFirstFile(cmdName);
 			if (NameTmp.empty())
 				continue;
 			do
 			{
-				if (wExt.find(wxFileName(NameTmp).GetExt().Upper()) != wxNOT_FOUND)//ÎÄ¼şÀ©Õ¹Ãû±ØĞëÔÚPATHEXT±äÁ¿ÀïÃæ
+				if (wExt.find(wxFileName(NameTmp).GetExt().Upper()) != wxNOT_FOUND)//æ–‡ä»¶æ‰©å±•åå¿…é¡»åœ¨PATHEXTå˜é‡é‡Œé¢
 				{
 					wFound = true;
 					wdir = ::wxGetCwd();
@@ -300,7 +300,7 @@ wxString GetFullCmdName(const wxString& commandName,const wxString& workingDir,c
 		}
 		::wxSetWorkingDirectory(cwd);
 	}
-	if (wxFileName(cmdName).IsAbsolute() == false)//Èç¹û²»ÊÇ¾ø¶ÔÂ·¾¶,×ª»»³É¾ø¶ÔÂ·¾¶
+	if (wxFileName(cmdName).IsAbsolute() == false)//å¦‚æœä¸æ˜¯ç»å¯¹è·¯å¾„,è½¬æ¢æˆç»å¯¹è·¯å¾„
 	{
 		if (cmdName.GetChar(0) != '\\')
 		{
@@ -340,21 +340,21 @@ bool MerryController::ShellExecute(const wxString& commandName,
 		wxChar c = commandName[n];
 		switch(c)
 		{
-			case '@'://Ç°µ¼'@'Òş²Ø´°¿ÚÔËĞĞ
+			case '@'://å‰å¯¼'@'éšè—çª—å£è¿è¡Œ
 				showCommand = SW_HIDE;
 				continue;
-			case '*'://ÒÔ¹ÜÀíÔ±È¨ÏŞÔËĞĞ
+			case '*'://ä»¥ç®¡ç†å‘˜æƒé™è¿è¡Œ
 				runas = true;
 				continue;
-			case '>'://¸ù¾İÏµÍ³ÅĞ¶Ï,NT6ÒÔÉÏÒÔ¹ÜÀíÔ±È¨ÏŞÔËĞĞ.
+			case '>'://æ ¹æ®ç³»ç»Ÿåˆ¤æ–­,NT6ä»¥ä¸Šä»¥ç®¡ç†å‘˜æƒé™è¿è¡Œ.
 				if (::wxGetWinVersion() >= wxWinVersion_6)
 					runas = true;
 				continue;
-			case '+'://Ç¿ÖÆ²ÎÊı±êÖ¾
+			case '+'://å¼ºåˆ¶å‚æ•°æ ‡å¿—
 				continue;
-			case '\2'://Ç¿ÖÆÊ¹ÓÃWinExec º¯ÊıÖ´ĞĞ
+			case '\2'://å¼ºåˆ¶ä½¿ç”¨WinExec å‡½æ•°æ‰§è¡Œ
 				winexec = true;
-			case '\1'://\1\2 ±êÖ¾ËµÃ÷¸ÃÃüÁîÒÑ¾­¾­¹ı´¦Àí,²»ĞèÒªÔÙ´Î´¦Àí
+			case '\1'://\1\2 æ ‡å¿—è¯´æ˜è¯¥å‘½ä»¤å·²ç»ç»è¿‡å¤„ç†,ä¸éœ€è¦å†æ¬¡å¤„ç†
 				NeedGetPath = false;
 				continue;
 			case ' ':
@@ -371,25 +371,25 @@ bool MerryController::ShellExecute(const wxString& commandName,
 
 	if (!LocationExec)
 	{
-		if (winexec || FullcmdName.empty())//Ã»ÓĞ»ñÈ¡µ½ÎÄ¼şÂ·¾¶Ö±½Óµ÷ÓÃWINEXECÖ´ĞĞ
+		if (winexec || FullcmdName.empty())//æ²¡æœ‰è·å–åˆ°æ–‡ä»¶è·¯å¾„ç›´æ¥è°ƒç”¨WINEXECæ‰§è¡Œ
 		{
 			__DEBUG_BEGIN(wxString::Format("cmd.exe /c start \"\" /D \"%s\" \"%s\" %s",workingDir,cmdName,commandArg));
 			return (int)::WinExec(wxString::Format("cmd.exe /c start \"\" /D \"%s\" \"%s\" %s",workingDir,cmdName,commandArg),SW_HIDE) > 32;
 		}
-		//ÓĞ»ñÈ¡µ½ÎÄ¼şÂ·¾¶£¬Ö±½ÓÆô¶¯¡£
+		//æœ‰è·å–åˆ°æ–‡ä»¶è·¯å¾„ï¼Œç›´æ¥å¯åŠ¨ã€‚
 		__DEBUG_BEGIN(FullcmdName.c_str());
 		return (int)::ShellExecute(NULL,(runas?_T("RunAs"):NULL), FullcmdName.c_str(), commandArg.c_str(), workingDir.c_str(), showCommand) > 32;
 
 		//wxString tmpName = GetFullCmdName(cmdName,workingDir,false);
 		//if (tmpName.empty())
 		//{
-		//	::wxMessageBox(wxString::Format(wxT("ÎŞ·¨ÔËĞĞ '%s'¡£ÇëÈ·¶¨ÎÄ¼şÃûÊÇ·ñÕıÈ·ºó£¬ÔÙÊÔÒ»´Î¡£"),cmdName),cmdName,wxOK | wxICON_ERROR);
+		//	::wxMessageBox(wxString::Format(wxT("æ— æ³•è¿è¡Œ '%s'ã€‚è¯·ç¡®å®šæ–‡ä»¶åæ˜¯å¦æ­£ç¡®åï¼Œå†è¯•ä¸€æ¬¡ã€‚"),cmdName),cmdName,wxOK | wxICON_ERROR);
 		//	return false;
 		//}
 		//return (int)::ShellExecute(NULL,(runas?_T("RunAs"):NULL), tmpName.c_str(), commandArg.c_str(), workingDir.c_str(), showCommand)>32;
 	}
 
-	LocationExec = false;//¶¨Î»ÎÄ¼şÎ»ÖÃ±êÖ¾¸´Î»
+	LocationExec = false;//å®šä½æ–‡ä»¶ä½ç½®æ ‡å¿—å¤ä½
 	if (FullcmdName.empty())
 		return false;
 
@@ -435,27 +435,27 @@ DWORD MerryController::ShellExecute(const wxString& commandName,
 		wxChar c = commandName[n];
 		switch(c)
 		{
-			case '?'://Ç°µ¼'?'Î¨Ò»½ø³Ì
+			case '?'://å‰å¯¼'?'å”¯ä¸€è¿›ç¨‹
 				SavePid = true;
 				continue;
-			case '@'://Ç°µ¼'@'Òş²Ø´°¿ÚÔËĞĞ
+			case '@'://å‰å¯¼'@'éšè—çª—å£è¿è¡Œ
 				showCommand = SW_HIDE;
 				continue;
-			case '*'://ÒÔ¹ÜÀíÔ±È¨ÏŞÔËĞĞ
+			case '*'://ä»¥ç®¡ç†å‘˜æƒé™è¿è¡Œ
 				runas = true;
 				continue;
-			case '>'://¸ù¾İÏµÍ³ÅĞ¶Ï,NT6ÒÔÉÏÒÔ¹ÜÀíÔ±È¨ÏŞÔËĞĞ.
+			case '>'://æ ¹æ®ç³»ç»Ÿåˆ¤æ–­,NT6ä»¥ä¸Šä»¥ç®¡ç†å‘˜æƒé™è¿è¡Œ.
 				if (::wxGetWinVersion() >= wxWinVersion_6)
 					runas = true;
 				continue;
-			case '+'://Ç¿ÖÆ²ÎÊı±êÖ¾
+			case '+'://å¼ºåˆ¶å‚æ•°æ ‡å¿—
 				continue;
-			case '\2'://Ç¿ÖÆÊ¹ÓÃWinExec º¯ÊıÖ´ĞĞ
+			case '\2'://å¼ºåˆ¶ä½¿ç”¨WinExec å‡½æ•°æ‰§è¡Œ
 				winexec = true;
-			case '\1'://\1\2 ±êÖ¾ËµÃ÷¸ÃÃüÁîÒÑ¾­¾­¹ı´¦Àí,²»ĞèÒªÔÙ´Î´¦Àí
+			case '\1'://\1\2 æ ‡å¿—è¯´æ˜è¯¥å‘½ä»¤å·²ç»ç»è¿‡å¤„ç†,ä¸éœ€è¦å†æ¬¡å¤„ç†
 				NeedGetPath = false;
 				continue;
-			case '|'://ÃüÁî±êÖ¾½áÎ².
+			case '|'://å‘½ä»¤æ ‡å¿—ç»“å°¾.
 				++n;
 				break;
 			case ' ':
@@ -480,7 +480,7 @@ DWORD MerryController::ShellExecute(const wxString& commandName,
 		ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
 		ShExecInfo.hwnd = NULL;
 		ShExecInfo.lpVerb = runas?_T("RunAs"):NULL;
-		ShExecInfo.lpFile = cmdName.c_str();    //ÒªÔËĞĞµÄÎÄ¼ş
+		ShExecInfo.lpFile = cmdName.c_str();    //è¦è¿è¡Œçš„æ–‡ä»¶
 		ShExecInfo.lpParameters =commandArg.c_str();
 		ShExecInfo.lpDirectory = workingDir.c_str();
 		ShExecInfo.nShow = showCommand;
@@ -490,7 +490,7 @@ DWORD MerryController::ShellExecute(const wxString& commandName,
 		return 0;
 	}
 
-	LocationExec = false;//¶¨Î»ÎÄ¼şÎ»ÖÃ±êÖ¾¸´Î»
+	LocationExec = false;//å®šä½æ–‡ä»¶ä½ç½®æ ‡å¿—å¤ä½
 	wxString FullcmdName = NeedGetPath?GetCMDPath(cmdName):cmdName;
 	if (FullcmdName.empty())
 		return 0;
