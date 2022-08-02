@@ -1,4 +1,0 @@
-[submodule "third_party/wxWidgets"]
-	path = third_party/wxWidgets
-	url = https://github.com/wxWidgets/wxWidgets
-	tag = v3.0.5.1
