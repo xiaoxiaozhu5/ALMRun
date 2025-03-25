@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////////////////////////
+﻿/////////////////////////////////////////////////////////////////////////////
 // Name:        DlgConfig.cpp
 // Purpose:     
 // Author:      test
@@ -158,33 +158,33 @@ void DlgConfig::CreateControls()
 
     itemBoxSizer2->Add(itemStaticBoxSizer4, 0, wxGROW|wxALL, 5);
 
-	wxStaticBox* itemStaticBoxSizer3Static = new wxStaticBox(itemDialog1, wxID_ANY, "基本配置");
+	wxStaticBox* itemStaticBoxSizer3Static = new wxStaticBox(itemDialog1, wxID_ANY, wxT("基本配置"));
     wxStaticBoxSizer* itemStaticBoxSizer3 = new wxStaticBoxSizer(itemStaticBoxSizer3Static, wxVERTICAL);
     itemBoxSizer2->Add(itemStaticBoxSizer3, 0, wxGROW|wxALL, 5);
     wxArrayString configStrings;
-	configStrings.Add("随系统自动启动");
-	configStrings.Add("保持窗口置顶");
-    configStrings.Add("允许数字快捷键");
-    configStrings.Add("显示托盘图标");
-    configStrings.Add("仅显示前10项");
-	configStrings.Add("显示命令行");
-    configStrings.Add("仅剩一项时立即执行");
-	configStrings.Add("保存最近一次匹配");
-	configStrings.Add("从任意位置匹配关键字");
-    configStrings.Add("数字序列顺序 = 0, 1, ..., 8, 9");
-    configStrings.Add("前辍匹配优先");
-	configStrings.Add("显示命令提示信息");
-	configStrings.Add("禁用WOW64文件系统重定向");
-	configStrings.Add("添加到<发送到>菜单");
-	configStrings.Add("主窗体弹出时播放声音");
-	configStrings.Add("按空格键执行");
-	configStrings.Add("主窗体弹出时显示列表");
-	configStrings.Add("按两次程序热键重复执行上一个命令");
-	configStrings.Add("鼠标双击运行");
-	configStrings.Add("允许命令名重复");
-	configStrings.Add("禁止同一命令多次运行");
-	configStrings.Add("快捷方式读取目标属性");
-	configStrings.Add("保存窗口位置");
+	configStrings.Add(wxT("随系统自动启动"));
+	configStrings.Add(wxT("保持窗口置顶"));
+    configStrings.Add(wxT("允许数字快捷键"));
+    configStrings.Add(wxT("显示托盘图标"));
+    configStrings.Add(wxT("仅显示前10项"));
+	configStrings.Add(wxT("显示命令行"));
+    configStrings.Add(wxT("仅剩一项时立即执行"));
+	configStrings.Add(wxT("保存最近一次匹配"));
+	configStrings.Add(wxT("从任意位置匹配关键字"));
+    configStrings.Add(wxT("数字序列顺序 = 0, 1, ..., 8, 9"));
+    configStrings.Add(wxT("前辍匹配优先"));
+	configStrings.Add(wxT("显示命令提示信息"));
+	configStrings.Add(wxT("禁用WOW64文件系统重定向"));
+	configStrings.Add(wxT("添加到<发送到>菜单"));
+	configStrings.Add(wxT("主窗体弹出时播放声音"));
+	configStrings.Add(wxT("按空格键执行"));
+	configStrings.Add(wxT("主窗体弹出时显示列表"));
+	configStrings.Add(wxT("按两次程序热键重复执行上一个命令"));
+	configStrings.Add(wxT("鼠标双击运行"));
+	configStrings.Add(wxT("允许命令名重复"));
+	configStrings.Add(wxT("禁止同一命令多次运行"));
+	configStrings.Add(wxT("快捷方式读取目标属性"));
+	configStrings.Add(wxT("保存窗口位置"));
     config = new wxCheckListBox(itemStaticBoxSizer3->GetStaticBox(), ID_CHECKLISTBOX, wxDefaultPosition, wxDefaultSize, configStrings, 0 );
 	config_tip = new wxStaticText( itemStaticBoxSizer3->GetStaticBox(), wxID_STATIC,wxEmptyString, wxDefaultPosition, wxSize(-1,50), wxALIGN_LEFT|wxST_NO_AUTORESIZE|wxNO_BORDER);
 	config_tip->SetForegroundColour(wxColour(255, 0, 255));

@@ -69,7 +69,7 @@ public:
 
 	wxString gui_config[GUI_CONFIG_MAX];
 	static const char *config_str[];
-	static const char *config_tip[];
+	static const wxString config_tip[];
 	wxString Explorer;
 	wxString Root;
 	wxString Home;

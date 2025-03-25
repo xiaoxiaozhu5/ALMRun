@@ -1,0 +1,5 @@
+0.将想要支持多语言的字符串用"_()"包裹，比如：_("hello")
+1.安装：https://mlocati.github.io/articles/gettext-iconv-windows.html
+2.提取：xgettext --keyword=_ --output=ALMRun.pot *.cpp *.h
+3.使用Poedit翻译，将po文件编译成mo文件，放到locales\zh_CN\LC_MESSAGES\ALMRun.mo
+4.将locale文件夹放到可执行程序同目录下

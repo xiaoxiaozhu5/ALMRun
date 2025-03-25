@@ -1,4 +1,4 @@
-#include "MerryListBoxPanel.h"
+﻿#include "MerryListBoxPanel.h"
 #include "DlgAddNewCmd.h"
 #include "MerryApp.h"
 
@@ -156,7 +156,7 @@ bool MerryListBoxPanel::DelSelectedItem()
 	int flags = cmd->GetFlags();
 	if ((flags & CMDS_FLAG_CMDS))
 	{
-		if (wxMessageBox(wxString::Format("删除 ID:[%d] %s\n命令:%s?",flags >> 4,cmd->GetCommandName(),cmd->GetCmd()),"提示",wxYES_NO|wxICON_WARNING) != wxYES)
+		if (wxMessageBox(wxString::Format(wxT("删除 ID:[%d] %s\n命令:%s?"),flags >> 4,cmd->GetCommandName(),cmd->GetCmd()),wxT("提示"),wxYES_NO|wxICON_WARNING) != wxYES)
 			return false;
 	#ifdef _ALMRUN_CONFIG_H_
 		if (g_config->DeleteCmd(flags>>4))
@@ -164,7 +164,7 @@ bool MerryListBoxPanel::DelSelectedItem()
 			return g_commands->DelCommand(cmd->GetCommandID());
 	}
 	else
-		wxMessageBox("该命令可能是LUA脚本或自动生成的命令,无法删除");
+		wxMessageBox(wxT("该命令可能是LUA脚本或自动生成的命令,无法删除"));
 	return false;
 }
 
@@ -237,7 +237,7 @@ void MerryListBoxPanel::onPopMenu(wxCommandEvent& e)
 					const MerryCommand* cmd = GetSelectionCommand();
 					if (!(cmd->GetFlags() & CMDS_FLAG_CMDS)) 
 					{
-						wxMessageBox("该命令可能是LUA脚本或自动生成的命令,继续编辑将会自动转为ALMRun常规命令","提示");
+						wxMessageBox(wxT("该命令可能是LUA脚本或自动生成的命令,继续编辑将会自动转为ALMRun常规命令"),wxT("提示"));
 						dlg = new DlgAddNewCmd();
 						dlg->cmdName->SetValue(cmd->GetCommandName());
 						dlg->cmdDesc->SetValue(cmd->GetCommandDesc());
@@ -482,7 +482,7 @@ void MerryListBoxPanel::DrawItems(MerryPaintDC& dc)
 
 		if (this->flags > 0)
 		{
-			title = "  输入命令参数按回车执行或按Esc键返回";
+			title = wxT("  输入命令参数按回车执行或按Esc键返回");
 			this->flags = 0;
 		}else {
 	#ifdef _RELWITHDEBINFO

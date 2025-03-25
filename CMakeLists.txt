@@ -1,15 +1,16 @@
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 3.5...3.31)
 set(PROJ_NAME ALMRun)
 set(CMAKE_VS_PLATFORM_TOOLSET v142)
 project(${PROJ_NAME})
 # platform
 math(EXPR BIT "${CMAKE_SIZEOF_VOID_P} * 8")
 
-find_package(wxWidgets COMPONENTS core base adv REQUIRED)
-include(${wxWidgets_USE_FILE})
+# need change here to support your own wxWidgets
+find_package(wxWidgets COMPONENTS core base adv net REQUIRED PATHS ../wxWidgets-3.2.7/install NO_DEFAULT_PATH)
 
 if(WIN32)
 	include_directories(third_party/lua/win32/include)
+	add_definitions(-DWIN32_LEAN_AND_MEAN)
 	set(PLATFORM win${BIT})
 elseif(APPLE)
 	set(PLATFORM macos)

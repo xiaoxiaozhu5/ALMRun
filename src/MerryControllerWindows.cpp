@@ -1,3 +1,5 @@
+#include <ALMRunCommon.h>
+
 #include "MerryController.h"
 
 #ifdef __WXMSW__
@@ -6,6 +8,10 @@
 #include "MerryHelper.h"
 #include <vector>
 #include <Windows.h>
+
+#include <shellapi.h>
+
+#undef ShellExecute
 
 MerryController::MerryController()
 {
@@ -502,7 +508,7 @@ DWORD MerryController::ShellExecute(const wxString& commandName,
 		::WinExec(wxString::Format("%s \"%s\"",g_config->Explorer,FullcmdName),SW_SHOW);
 	else
 #endif//ifdef _ALMRUN_CONFIG_H_
-		::ShellExecute(NULL,NULL,_T("explorer.exe"),_T("/n,/select,")+FullcmdName.c_str(),NULL, SW_SHOW);
+		::ShellExecuteW(NULL,NULL,_T("explorer.exe"),_T("/n,/select,")+FullcmdName.c_str(),NULL, SW_SHOW);
 	return 0;
 }
 

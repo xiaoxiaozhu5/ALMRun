@@ -10,6 +10,10 @@
 #include "MerryController.h"
 #include <wx/sound.h>
 
+#ifdef __WXMSW__
+#include <shellapi.h>
+#endif
+
 //#define DEBUG_ALWAYS_SHOW
 
 BEGIN_EVENT_TABLE(MerryFrame, wxFrame)

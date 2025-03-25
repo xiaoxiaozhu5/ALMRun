@@ -286,11 +286,15 @@ void MerryTextCtrl::OnKeyDownEvent(wxKeyEvent& e)
 			if (this->EnterArgs > 0)
 			{
 				if (this->GetInsertionPoint()<this->EnterArgs)
+				{
 					this->SetInsertionPoint(-1);
+				}
 				else if (this->GetInsertionPoint()==this->EnterArgs)
 				{
-					if (keyCode == WXK_LEFT || keyCode == WXK_BACK)//设置光标在命令之后
+					if (keyCode == WXK_LEFT || keyCode == WXK_BACK)
+					{
 						break;
+					}
 				}
 			}
 			e.Skip();

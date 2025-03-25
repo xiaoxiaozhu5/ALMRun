@@ -1,4 +1,4 @@
-#include "DlgParam.h"
+﻿#include "DlgParam.h"
 #include "ALMRunConfig.h"
 #include "MyTextCompleter.h"
 
@@ -63,12 +63,12 @@ DlgParam::DlgParam( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	comboBox->AutoComplete(new MyTextCompleter(comboBox));
 	comboBox->SetSelection(0);
 	comboBox->Bind(wxEVT_KEY_DOWN,&DlgParam::OnKey,this);
-	comboBox->SetToolTip("提示: \n1.选中一个历史记录按Alt+Delete可以删除.\n2.按[Alt+F]可以插入一个文件路径.\n3.按[Alt+D]可以插入一个文件夹路径");
+	comboBox->SetToolTip(wxT("提示: \n1.选中一个历史记录按Alt+Delete可以删除.\n2.按[Alt+F]可以插入一个文件路径.\n3.按[Alt+D]可以插入一个文件夹路径"));
 
 	bSizer2->Add(comboBox, 0, wxALL, 5 );
 
-	wxButton* ButtonOk = new wxButton(this,wxID_OK,"确定(&O)",wxDefaultPosition,wxDefaultSize);
-	wxButton* ButtonCancel = new wxButton(this,wxID_CANCEL,"取消(&O)",wxDefaultPosition,wxDefaultSize);
+	wxButton* ButtonOk = new wxButton(this,wxID_OK,wxT("确定(&O)"),wxDefaultPosition,wxDefaultSize);
+	wxButton* ButtonCancel = new wxButton(this,wxID_CANCEL,wxT("取消(&O)"),wxDefaultPosition,wxDefaultSize);
 	ButtonOk->SetDefault();
 	bSizer2->Add(ButtonOk,0,wxALL,5);
 	bSizer2->Add(ButtonCancel,0,wxALL,5);
@@ -94,7 +94,7 @@ void DlgParam::OnKey(wxKeyEvent& e)
 			int i = m_array.Index(comboBox->GetValue());
 			if (i != wxNOT_FOUND)
 			{
-				if (wxMessageBox(wxString::Format("确定要删除参数历史记录:\n [ %s ]",comboBox->GetValue()),"提示",wxYES_NO|wxICON_WARNING) == wxYES)
+				if (wxMessageBox(wxString::Format(wxT("确定要删除参数历史记录:\n [ %s ]"),comboBox->GetValue()),wxT("提示"),wxYES_NO|wxICON_WARNING) == wxYES)
 				{
 					m_array.RemoveAt(i);
 					tfile.RemoveLine(i);
@@ -105,9 +105,9 @@ void DlgParam::OnKey(wxKeyEvent& e)
 			}
 		}
 		else if (key == 'F')
-			path = wxFileSelector("请选择一个文件",wxEmptyString,wxEmptyString,wxEmptyString,wxFileSelectorDefaultWildcardStr,0,this);
+			path = wxFileSelector(wxT("请选择一个文件"),wxEmptyString,wxEmptyString,wxEmptyString,wxFileSelectorDefaultWildcardStr,0,this);
 		else if (key == 'D')
-			path = wxDirSelector("请选择一个目录",wxEmptyString,0,wxDefaultPosition,this);
+			path = wxDirSelector(wxT("请选择一个目录"),wxEmptyString,0,wxDefaultPosition,this);
 		if (!path.empty())
 		{
 			wxString str = comboBox->GetValue();

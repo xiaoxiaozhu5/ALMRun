@@ -1,4 +1,4 @@
-#include "MerryCommandManager.h"
+﻿#include "MerryCommandManager.h"
 #include "MerryHotkey.h"
 #include "ALMRunConfig.h"
 #include "MerryListBoxPanel.h"
@@ -9,30 +9,30 @@
 
 ALMRunConfig* g_config = NULL;
 const char *ALMRunConfig::config_str[] = {"AutoRun","StayOnTop","NumberKey","ShowTrayIcon","ShowTopTen","ShowCommandLine","ExecuteIfOnlyOne","RememberFavouratMatch","MatchAnywhere","IndexFrom0to9","OrderByPre","ShowTip","DisableWow64FsRedirection","AddToSendTo","PlayPopupNotify","SpaceKey","AutoPopup","DoubleToggleFunc","DoubleClick","DuplicateCMD","cmdSingleProecss","cmdReadShortcut","SaveWinPos","ShowCMDErrInfo"};
-const char *ALMRunConfig::config_tip[] = {
-	"如果选中，随系统启动而自动运行(添加一个快捷方式到启动菜单),快捷键 Ctrl+Shift+R,部份系统下也可以直接按这个快捷键快速启动",
-	"保持程序窗口置顶,默认禁用.",
-	"选中时敲0-9键执行对应编号的快捷项",
-	"选中时在系统托盘显示图标",
-	"选中时仅显示前10项快捷项",
-	"如果选中，在底部显示命令行",
-	"选中时列表只剩一项时无需按键立即执行",
-	"如果选中，记住最近一次关键字和快捷项的对应关系",
-	"如果未选中，从第一个字母匹配关键字\n注:设置该项会自动修改CompareMode的值.(如果有通过LUA脚本动态配置则以LUA的配置为准)",
-	"如果未选中，编号顺序为 1, 2, ..., 9, 0",
-	"如果选中, 命令列表中前辍匹配的排前面",
-	"如果选中,鼠标移动列表框项目时会显示备注信息或命令行",
-	"运行程序之前禁用系统的WOW64重定向,解决在64位系统上部份64位程序无法运行的问题",
-	"如果选中，将本软件添加到“发送到”菜单",
-	"如果选中，当窗体弹出时播放声音",
-	"如果选中，按下空格键就启动当前条目",
-	"如果选中，显示ALMRun界面时自动显示列表框",
-	"如果选中，连续按两次程序热键相当于ALT+L功能，重复执行上一次的命令\n注:两次间隔不超过300毫秒才有效",
-	"如果选中，鼠标单击选中列表条目，双击运行\n否则鼠标移动自动选中,单击运行",
-	"如果选中，允许命令名称一样，否则添加命令时名称一样会失败。",
-	"如果选中, 同一个命令只允许运行一个,根据进程PID来确定(全局).",
-	"如果选中, 添加快捷方式文件(.lnk)作为命令时自动读取该快捷方式的属性.",
-	"如果选中, 保存当前的窗口位置,下次启动还是使用同一位置而不是自动居中",
+const wxString ALMRunConfig::config_tip[] = {
+wxT("如果选中，随系统启动而自动运行(添加一个快捷方式到启动菜单),快捷键 Ctrl+Shift+R,部份系统下也可以直接按这个快捷键快速启动"),
+wxT("保持程序窗口置顶,默认禁用."),
+wxT("选中时敲0-9键执行对应编号的快捷项"),
+wxT("选中时在系统托盘显示图标"),
+wxT("选中时仅显示前10项快捷项"),
+wxT("如果选中，在底部显示命令行"),
+wxT("选中时列表只剩一项时无需按键立即执行"),
+wxT("如果选中，记住最近一次关键字和快捷项的对应关系"),
+wxT("如果未选中，从第一个字母匹配关键字\n注:设置该项会自动修改CompareMode的值.(如果有通过LUA脚本动态配置则以LUA的配置为准)"),
+wxT("如果未选中，编号顺序为 1, 2, ..., 9, 0"),
+wxT("如果选中, 命令列表中前辍匹配的排前面"),
+wxT("如果选中,鼠标移动列表框项目时会显示备注信息或命令行"),
+wxT("运行程序之前禁用系统的WOW64重定向,解决在64位系统上部份64位程序无法运行的问题"),
+wxT("如果选中，将本软件添加到“发送到”菜单"),
+wxT("如果选中，当窗体弹出时播放声音"),
+wxT("如果选中，按下空格键就启动当前条目"),
+wxT("如果选中，显示ALMRun界面时自动显示列表框"),
+wxT("如果选中，连续按两次程序热键相当于ALT+L功能，重复执行上一次的命令\n注:两次间隔不超过300毫秒才有效"),
+wxT("如果选中，鼠标单击选中列表条目，双击运行\n否则鼠标移动自动选中,单击运行"),
+wxT("如果选中，允许命令名称一样，否则添加命令时名称一样会失败。"),
+wxT("如果选中, 同一个命令只允许运行一个,根据进程PID来确定(全局)."),
+wxT("如果选中, 添加快捷方式文件(.lnk)作为命令时自动读取该快捷方式的属性."),
+wxT("如果选中, 保存当前的窗口位置,下次启动还是使用同一位置而不是自动居中"),
 };
 
 ALMRunConfig::ALMRunConfig()
@@ -119,7 +119,7 @@ ALMRunConfig::ALMRunConfig()
 	if (!g_hotkey->RegisterHotkey(g_commands->AddCommand(wxEmptyString,wxEmptyString,"toggleMerry",wxEmptyString,g_lua->get_funcref(LUA_toggleMerry),HotKey,0)))
 	{
 		this->set("ShowTrayIcon",true);
-		wxMessageBox(wxString::Format("热键 %s 注册失败!",HotKey),"错误提示",0x00000100);
+		wxMessageBox(wxString::Format(wxT("热键 %s 注册失败!"),HotKey),wxT("错误提示"),0x00000100);
 	}
 	//重载配置热键配置
 	HotKeyReLoad = conf->Read("HotKeyReLoad");
@@ -148,7 +148,7 @@ ALMRunConfig::ALMRunConfig()
 		if (InSendTo == false)
 		{
 			if (!CreateFileShortcut(::wxGetApp().argv[0],Sendto.c_str(),Home,0,_T("ALMRun 快速启动工具")))
-				wxMessageBox("添加到<发送到>菜单失败!");
+				wxMessageBox(wxT("添加到<发送到>菜单失败!"));
 		}
 		
 	}
@@ -162,7 +162,7 @@ ALMRunConfig::ALMRunConfig()
 		if (InStartup == false)
 		{
 			if (!CreateFileShortcut(::wxGetApp().argv[0],Startup.c_str(),Home,MAKEWORD('R',HOTKEYF_ALT | HOTKEYF_CONTROL),_T("ALMRun 快速启动工具")))
-				wxMessageBox("添加自动启动到<开始/启动>失败!");
+				wxMessageBox(wxT("添加自动启动到<开始/启动>失败!"));
 		}
 
 	}
@@ -326,13 +326,13 @@ int ALMRunConfig::AddCmd(const wxString& cmd,const wxString& name,const wxString
 
 	if (cmdId < 0)
 	{
-		MerrySetLastError(wxString::Format("添加命令失败\n命令%s\n%s",name,MerryGetLastError()));
+		MerrySetLastError(wxString::Format(wxT("添加命令失败\n命令%s\n%s"),name,MerryGetLastError()));
 		return -1;
 	}
 
 	if (!key.empty() && !g_hotkey->RegisterHotkey(cmdId))
 	{
-		MerrySetLastError(wxString::Format("注册热键失败:%s\n,命令[%d]:%s\n%s",key,Id,name,MerryGetLastError()));
+		MerrySetLastError(wxString::Format(wxT("注册热键失败:%s\n,命令[%d]:%s\n%s"),key,Id,name,MerryGetLastError()));
 		return -1;
 	}
 

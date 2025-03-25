@@ -1,4 +1,4 @@
-#include "SkinConfig.h"
+﻿#include "SkinConfig.h"
 
 SkinConfig *skin;
 SkinConfig::SkinConfig()
@@ -20,7 +20,7 @@ SkinConfig::SkinConfig()
 	//default custom config;
 	custom[DEFAULT_TITLE] =wxT("ALMRun");
 	custom[LIST_FMT] = "$$. $N";
-	custom[SKIN_FONT]="ו";
+	custom[SKIN_FONT]="    ";
 	skin_name = "merry";
 
 	read_config();

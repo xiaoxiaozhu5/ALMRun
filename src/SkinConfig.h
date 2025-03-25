@@ -4,7 +4,7 @@
 #include "MerryWx.h"
 #include <wx/fileconf.h>
 
-const char		ALMRUN_DEFAULT_TITLE[] = "ALMRun 快速启动工具";
+const char		ALMRUN_DEFAULT_TITLE[] = "ALMRun";
 const char		ALMRUN_DEFAULT_CONFIG_FILE[] = "LuaEx/ALMRun.lua";
 const int		MERRY_DEFAULT_LIST_BOX_ITEM_MAX_NUM = 10;
 #define SKIN_TYPE_ALPHA 1

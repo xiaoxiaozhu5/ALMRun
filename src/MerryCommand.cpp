@@ -1,4 +1,4 @@
-#include "MerryCommand.h"
+﻿#include "MerryCommand.h"
 #include "MerryCommandManager.h"
 #include "MerryLua.h"
 #include "MerryApp.h"

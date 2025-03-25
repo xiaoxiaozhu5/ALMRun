@@ -5,6 +5,10 @@ IMPLEMENT_APP(MerryApp)
 
 bool MerryApp::OnInit()
 {
+	wxLocale* locale = new wxLocale(wxLANGUAGE_CHINESE_SIMPLIFIED);
+    locale->AddCatalogLookupPathPrefix("locales");  
+    locale->AddCatalog("ALMRun");                 
+
 	const wxString name = wxString::Format("ALMRun-%s", wxGetUserId().c_str());
     m_checker = new wxSingleInstanceChecker(name);
     if (m_checker->IsAnotherRunning())//程序已经在运行中..

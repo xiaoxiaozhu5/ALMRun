@@ -6,6 +6,7 @@ MerryLua* g_lua = NULL;
 const char *MerryLua::lua_func_str[] = {"toggleMerry","ReConfig","CmdCallFunc","HookCompare","plugin_command","read_altrun_config"};
 MerryLua::MerryLua()
 {
+	int i = 0;
 	L = luaL_newstate();
 	assert(L);
 	luaL_openlibs(L);
@@ -96,7 +97,7 @@ MerryLua::MerryLua()
 	lua_setglobal(L, "HWND_TEXTCTRL");
 
 	//首先初始化
-	for(int i=0 ; i < LUA_FUNC_MAX ; ++i )
+	for (; i < LUA_FUNC_MAX ; ++i )
 		lua_func[i] = LUA_NOREF;
 
 	//获取内置函数

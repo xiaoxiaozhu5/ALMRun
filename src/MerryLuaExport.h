@@ -11,6 +11,13 @@
 #include <wx/stdpaths.h>
 #include "dlgconfig.h"
 #include "ALMRunCommon.h"
+
+#ifdef __WXMSW__
+#include <timeapi.h>
+#include <shellapi.h>
+#undef ShellExecute
+#endif
+
 extern "C"
 {
 #ifndef   EVERYTHING_DLL       //如果没有定义这个宏  
@@ -32,9 +39,9 @@ static int LuaAddCommand(lua_State* L)
 	if (!cmd)
 		luaL_error(L, "bad argument #1 to 'addCommand' (table expected)");
 	else if (cmd->Name.empty() && cmd->Key.empty())
-		luaL_error(L, "Command name or key not found.\r\n\r\n参数错误,丢失name或key参数.");
+		luaL_error(L, "Command name or key not found.\r\n\r\n");
 	else if (cmd->cmdLine.empty() && cmd->FuncRef == 0)
-		luaL_error(L, "can't find the command or func\r\n\r\n参数错误,cmd或func参数未设置.");
+		luaL_error(L, "can't find the command or func\r\n\r\n");
 	else
 		commandID = g_commands->AddCommand(cmd);
 

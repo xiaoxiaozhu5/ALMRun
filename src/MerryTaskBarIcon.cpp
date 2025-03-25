@@ -19,13 +19,13 @@ wxMenu* MerryTaskBarIcon::CreatePopupMenu()
 {
 	wxMenu* menu = new wxMenu;
 
-	menu->Append(MENU_ITEM_SHOW, wxT("显示界面(&O)"));
-	menu->Append(MENU_ITEM_GUI_CONFIG, wxT("参数配置(&C)"));
-	menu->Append(MENU_ITEM_CMDMGR, wxT("命令管理(&S)"));
-	menu->Append(MENU_ITEM_OPEN_CONFIG, wxT("程序目录(&S)"));
-	menu->Append(MENU_ITEM_RECONFIG, wxT("刷新配置(R)"));
-	menu->Append(MENU_ITEM_ABOUT, wxT("关于ALMRun(&A)"));
-	menu->Append(MENU_ITEM_EXIT1, wxT("退出(&X)"));
+	menu->Append(MENU_ITEM_SHOW, _("Show(&O)"));
+	menu->Append(MENU_ITEM_GUI_CONFIG, _("Settings(&C)"));
+	menu->Append(MENU_ITEM_CMDMGR, _("Commands(&S)"));
+	menu->Append(MENU_ITEM_OPEN_CONFIG, _("Open Program Location(&S)"));
+	menu->Append(MENU_ITEM_RECONFIG, _("Refresh(R)"));
+	menu->Append(MENU_ITEM_ABOUT, _("About(&A)"));
+	menu->Append(MENU_ITEM_EXIT1, _("Exit(&X)"));
 
 	return menu;
 }
